@@ -12,6 +12,24 @@ block content
   h1= title
   p Welcome to your Project Skeleton
   form(action="/users/logout", method='post')
-   button(type="submit" ) Log Out
-  //-  input(type="submit" )
-
+   button(type="submit") Log Out
+  div
+    a(class='btn btn-success' href='/book/add' role='button') Add Book
+  table(class='tasks-table')
+    thead
+      tr
+        th Task Name
+        th Description
+        th Priority Start Date
+        th Priority End Date
+        th Publisher
+        th
+    tbody
+      each book in books
+        tr
+          td= book.title
+          td= book.author
+          td= book.releaseDate
+          td= book.pageCount
+          td= book.publisher
+          td
