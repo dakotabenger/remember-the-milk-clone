@@ -66,7 +66,7 @@ if (validatorErrors.isEmpty()) {
 }));
 
 router.get("/login",csrfProtection,asyncHandler(async (req,res) => {
-  res.render('login', {
+  res.render('log-in', {
     title: 'Login',
     csrfToken: req.csrfToken()
   })
