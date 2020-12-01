@@ -22,13 +22,13 @@ block content
         th Description
         th Priority Start Date
         th Priority End Date
-        
+
     tbody
-      each book in books
+      each task in tasks
         tr
           td= book.title
           td= book.author
           td= book.releaseDate
           td= book.pageCount
           td= book.publisher
-          td
+          
