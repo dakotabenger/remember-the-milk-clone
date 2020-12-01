@@ -5,6 +5,7 @@ block content
         h1 Remember The Milk
             h2 Please complete to create your account.
                 form(method="post" action="/users")
+                    input(type="hidden" name="_csrf" value=csrfToken)
 
                     input(class="user-input" type="text" placeholder="Username")
 
