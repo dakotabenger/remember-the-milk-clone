@@ -4,7 +4,7 @@ block content
     div(class="sign-up-container")
         h1 Remember The Milk
             h2 Please complete to create your account.
-                form(method="post" action="/users")
+                form(method="post" action="/users/sign-up")
                     input(type="hidden" name="_csrf" value=csrfToken)
 
                     input(class="user-input" type="text" placeholder="Username" name="username")
@@ -15,6 +15,6 @@ block content
 
                     input(class="user-input" type="password" placeholder="Confirm password" name="confirmPassword")
 
-                    button(class="user-input" type="submit" name="submit") Sign Up
+                    input(class="user-input" type="submit" name="submit")
 
                 a(href="/log-in") Already have an account? Log in here.

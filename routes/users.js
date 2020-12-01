@@ -8,7 +8,7 @@ const { check, validationResult } = require('express-validator');
 
 
 const userValidators = [
-check('emailAddress')
+check('email')
   .exists({ checkFalsy: true })
   .withMessage('Please provide a Email Address')
   .isEmail()
@@ -28,7 +28,7 @@ check('confirmPassword')
 ];
 
 const loginValidators = [
-  check('emailAddress')
+  check('email')
     .exists({ checkFalsy: true })
     .withMessage('Please provide a Email Address'),
   check('password')
@@ -40,7 +40,7 @@ router.get('/sign-up',csrfProtection,asyncHandler(async (req,res) => {
   const newUser = db.User.build();
   res.render('sign-up', {
     title: 'Register',
-    user,
+    newUser,
     csrfToken: req.csrfToken(),
   });
 }))
@@ -57,7 +57,6 @@ if (validatorErrors.isEmpty()) {
   const errors = validatorErrors.array().map((error) => error.msg);
   res.render('sign-up', {
     title: 'Register',
-    user,
     errors,
     csrfToken: req.csrfToken(),
   })
