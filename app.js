@@ -8,9 +8,11 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const {sessionSecret} = require("./config/index")
 const tasksRouter = require('./routes/tasks')
 
 const app = express();
+const { restoreUser } = require('./auth.js')
 
 // view engine setup
 app.set('view engine', 'pug');
@@ -26,7 +28,7 @@ const store = new SequelizeStore({ db: sequelize });
 
 app.use(
   session({
-    secret: 'superSecret',
+    secret: sessionSecret,
     store,
     saveUninitialized: false,
     resave: false,
@@ -35,6 +37,21 @@ app.use(
 
 // create Session table if it doesn't already exist
 store.sync();
+app.use((req, res, next) => {
+  // Attempt to get the `history` array from session.
+  // If it's not initialized, then create an array
+  // and assigned it back to session.
+  let { history } = req.session;
+  if (!history) {
+    history = [];
+    req.session.history = history;
+  }
+  const url = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+
+  history.unshift(url);
+   next();
+});
+app.use(restoreUser);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
