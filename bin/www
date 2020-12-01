@@ -1,7 +1,17 @@
 #!/usr/bin/env node
 
-const port = process.env.PORT || '8080';
+// const port = process.env.PORT || '8080';
+const {port} = require('../config')//(W11D4 Data-Driven Apps - Part 2)
 
 const app = require('../app');
+const db = require('../db/models'); //(W11D4 Data-Driven Apps - Part 2)
 
-app.listen(port, () => console.log(`Listening on port ${port}...`));
+db.sequelize.authenticate() //(W11D4 Data-Driven Apps - Part 2)
+    .then(()=> {
+        console.log('Database connection success! Sequelize is ready to use...')
+        app.listen(port, () => console.log(`Listening on port ${port}...`));
+    })
+    .catch((err)=> {
+        console.log('Database connection failure :(');
+        console.log(err)
+    })

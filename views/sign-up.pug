@@ -1,0 +1,23 @@
+extends layout.pug
+
+block content
+    div(class="sign-up-container")
+        h1 Remember The Milk
+            h2 Please complete to create your account.
+                form(method="post" action="/guest")
+
+                    input(class="user-input" type="firstName" placeholder="First name")
+
+                    input(class="user-input" type="lastName" placeholder="Last name")
+
+                    input(class="user-input" type="username" placeholder="Username")
+
+                    input(class="user-input" type="email" placeholder="email")
+
+                    input(class="user-input" type="password" placeholder="Password")
+
+                    input(class="user-input" type="confirmPassword" placeholder="Confirm password")
+
+                    button(class="user-input" type="submit") Sign Up
+
+                a(href="/log-in") Already have an account? Log in here.
