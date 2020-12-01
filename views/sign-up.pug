@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Sign Up
+    body
+        h1 Remember The Milk
+            h2 Please complete to create your account.
+                form(method="post" action="/guest")
+
+                    input(type="firstName" id="firstName" placeholder="First name")
+
+                    input(type="lastName" id="lastName" placeholder="Last name")
+
+                    input(type="username" id="username" placeholder="Username")
+
+                    input(type="email" id="email" placeholder="email")
+
+                    input(type="password" id="password" placeholder="Password")
+
+                    input(type="confirmPassword" id="confirmPassword" placeholder="Confirm password")
+
+                    button(type="submit") Sign Up
