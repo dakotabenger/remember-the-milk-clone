@@ -25,7 +25,7 @@ const store = new SequelizeStore({ db: sequelize });
 
 app.use(
   session({
-    secret: 'superSecret',
+    secret: process.env.SESSION_SECRET,
     store,
     saveUninitialized: false,
     resave: false,
@@ -34,6 +34,20 @@ app.use(
 
 // create Session table if it doesn't already exist
 store.sync();
+app.use((req, res, next) => {
+  // Attempt to get the `history` array from session.
+  // If it's not initialized, then create an array
+  // and assigned it back to session.
+  let { history } = req.session;
+  if (!history) {
+    history = [];
+    req.session.history = history;
+  }
+  const url = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+
+  history.unshift(url);
+   next();
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

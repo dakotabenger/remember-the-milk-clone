@@ -14,6 +14,6 @@ module.exports = (sequelize, DataTypes) => {
   Task.associate = function(models) {
 Task.hasOne(models.List,{foreignKey:"list_id"})
 Task.hasOne(models.Tag,{foreignKey:"tag_id"})
-Task.belongssTo(models.User,{foreignKey:"user_id"})  };
+Task.belongsTo(models.User,{foreignKey:"user_id"})  };
   return Task;
 };
