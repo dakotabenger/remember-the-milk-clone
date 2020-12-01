@@ -73,14 +73,15 @@ router.get("/login",csrfProtection,asyncHandler(async (req,res) => {
 
 router.post("/login",csrfProtection,loginValidators,asyncHandler(async (req,res) => {
   let errors = [];
+  const {email, password} = req.body
   const validatorErrors = validationResult(req);
   if (validatorErrors.isEmpty()) {
-  const user = await db.User.findOne({ where: { emailAddress } });
+  const user = await db.User.findOne({ where: { email } });
 
   if (user !== null) {
     const passwordCheck = await bcrypt.compare(password,user.hashedPassword.toString());
 
-    if (passwordMatch) {
+    if (passwordCheck) {
       loginUser(req,res,user)
         return res.redirect('/lists');
     }
@@ -89,15 +90,15 @@ router.post("/login",csrfProtection,loginValidators,asyncHandler(async (req,res)
     } else {
       errors = validatorErrors.array().map((error) => error.msg);
     }
-    res.render('user-login', {
+    res.render('log-in', {
       title: 'Login',
-      emailAddress,
+      email,
       errors,
       csrfToken: req.csrfToken(),
     });
 }))
 router.post('/logout', (req,res) => {
   logoutUser(req,res)
-  res.redirect('/user/login');
+  res.redirect('/users/login');
 })
 module.exports = router;

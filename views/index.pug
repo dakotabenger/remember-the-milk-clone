@@ -11,6 +11,7 @@ append head
 block content
   h1= title
   p Welcome to your Project Skeleton
-  ul
-    each task in tasks
-      li= 
+  form(action="/users/logout", method='post')
+   button(type="submit" ) Log Out
+  //-  input(type="submit" )
+
