@@ -7,14 +7,14 @@ block content
                 form(method="post" action="/users")
                     input(type="hidden" name="_csrf" value=csrfToken)
 
-                    input(class="user-input" type="text" placeholder="Username")
+                    input(class="user-input" type="text" placeholder="Username" name="username")
 
-                    input(class="user-input" type="email" placeholder="email")
+                    input(class="user-input" type="email" placeholder="email" name="email")
 
-                    input(class="user-input" type="password" placeholder="Password")
+                    input(class="user-input" type="password" placeholder="Password" name="password")
 
-                    input(class="user-input" type="password" placeholder="Confirm password")
+                    input(class="user-input" type="password" placeholder="Confirm password" name="confirmPassword")
 
-                    button(class="user-input" type="submit") Sign Up
+                    button(class="user-input" type="submit" name="submit") Sign Up
 
                 a(href="/log-in") Already have an account? Log in here.
