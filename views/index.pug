@@ -6,6 +6,11 @@ append head
   //- add page specific js
   script(src="/javascripts/index.js" type="module" defer)
 
+//- TODO - Turn this into a table
+//- (W11D4 Data-Driven Apps - Part 3)...
 block content
   h1= title
   p Welcome to your Project Skeleton
+  ul
+    each task in tasks
+      li= 
