@@ -3,8 +3,9 @@ var router = express.Router();
 const db = require("../db/models/")
 const {asyncHandler,csrfProtection} = require("../ultils")
 const bcrypt = require('bcryptjs')
-const { loginUser } = require('../auth');
+const { loginUser, logoutUser } = require('../auth');
 const { check, validationResult } = require('express-validator');
+
 
 const userValidators = [
 check('emailAddress')
@@ -50,6 +51,7 @@ if (validatorErrors.isEmpty()) {
   const salt = await bcrypt.genSaltSync(10);
   const hashedPassword = await bcrypt.hash(req.body.password,salt)
   const newUser = await db.User.create({email: req.body.email,hashedPassword:hashedPassword,createdAt: Date.now(),updatedAt: Date.now()})
+  loginUser(req,res,newUser);
   res.redirect("/list")
 } else {
   const errors = validatorErrors.array().map((error) => error.msg);
@@ -78,11 +80,9 @@ router.post("/login",csrfProtection,loginValidators,asyncHandler(async (req,res)
 
   if (user !== null) {
     const passwordCheck = await bcrypt.compare(password,user.hashedPassword.toString());
-    
+
     if (passwordMatch) {
-      // If the password hashes match, then login the user
-          // and redirect them to the default route.
-          // TODO Login the user.
+      loginUser(req,res,user)
         return res.redirect('/lists');
     }
   }
@@ -97,4 +97,8 @@ router.post("/login",csrfProtection,loginValidators,asyncHandler(async (req,res)
       csrfToken: req.csrfToken(),
     });
 }))
+router.post('/logout', (req,res) => {
+  logoutUser(req,res)
+  res.redirect('/user/login');
+})
 module.exports = router;

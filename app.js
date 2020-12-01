@@ -10,6 +10,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const {sessionSecret} = require("./config/index")
 const app = express();
+const { restoreUser } = require('./auth.js')
 
 // view engine setup
 app.set('view engine', 'pug');
@@ -48,6 +49,7 @@ app.use((req, res, next) => {
   history.unshift(url);
    next();
 });
+app.use(restoreUser);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
