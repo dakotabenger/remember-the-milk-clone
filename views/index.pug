@@ -20,15 +20,20 @@ block content
       tr
         th Task Name
         th Description
-        th Priority Start Date
-        th Priority End Date
+        th Priority
+        th Start Date
+        th End Date
+        th Completed
 
     tbody
       each task in tasks
         tr
-          td= book.title
-          td= book.author
-          td= book.releaseDate
-          td= book.pageCount
-          td= book.publisher
-          
+          td= task.name
+          td= task.description
+          td= task.priority
+          td= task.start_date
+          td= task.end_date
+          td= task.completed
+            span
+              input(type="checkbox")
+
