@@ -10,12 +10,8 @@ const taskValidators = [
           .exists({ checkFalsy: true })
           .withMessage('Please provide a task'),
         check('description')
-          .custom((value, { req }) => {
-            if (value.length > 100) {
-              throw new Error('Description cannot be more than 100 characters');
-            }
-            return true;
-          }),
+          .isLength({max:100})
+          .withMessage("Description must be less than 100 characters")
         ];
 
 router.post("/",requireAuth,csrfProtection,taskValidators,asyncHandler(async (req,res) => {
@@ -51,6 +47,23 @@ router.post("/",requireAuth,csrfProtection,taskValidators,asyncHandler(async (re
         }       
 }))
 
+// Delete single task route
+router.delete("/:id")
+
+
+// Edit Single task route 
+router.patch("/:id")
+
+// Add Task to List
+router.patch("/:id/list/:listId")
+
+// Delete Task from list
+
+router.delete("/:id/list/:listId")
+
+// Get single Task
+
+router.get("/:id")
 
 
 
