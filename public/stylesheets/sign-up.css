@@ -20,7 +20,8 @@ h1 {
     font-size: 35px;
     font-style: normal;
     font-weight: 700;
-    margin-top: 30px;
+    margin-top: 80px;
+    margin-bottom: 10px;
 }
 
 .sign-up-text {
@@ -29,7 +30,7 @@ h1 {
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     margin-top: 0px;
     text-align: center;
 }
@@ -38,9 +39,9 @@ h1 {
   height: auto;
   letter-spacing: 0.00px;
   line-height: 25px;
-  margin-bottom: 22px;
+  margin-bottom: 32px;
   margin-left: 6.08px;
-  margin-top: 22px;
+  margin-top: 32px;
   min-height: 23px;
   min-width: 126px;
   text-align: left;
@@ -96,4 +97,94 @@ h1 {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.theme-toggle-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    background-color: white;
+    color: #427271;
+}
+
+/* light mode  */
+.image-container.light {
+    background-color: white;
+    background-image: url("../media/image-light.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.theme-toggle-button.light {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #5DA09E;
+    color: white;
+}
+
+.sign-up-container.light {
+    background-color: #ffffff;
+    align-content: center;
+}
+
+.sign-up-button.light {
+    margin-top: 22px;
+    margin-bottom: 22px;
+    color: white;
+    height: 40px;
+    background-color: #5DA09E;
+}
+
+.user-input.light {
+    height: auto;
+    letter-spacing: 0.00px;
+    line-height: 25px;
+    margin-bottom: 32px;
+    margin-left: 6.08px;
+    margin-top: 32px;
+    min-height: 23px;
+    min-width: 126px;
+    text-align: left;
+    white-space: nowrap;
+    width: auto;
+    background-color: white;
+    color: #5DA09E;
+    border: none;
+    border-bottom: 2px solid #5DA09E;
+  }
+
+  .sign-up-header.light {
+    background-color: transparent;
+    flex-shrink: 0;
+    height: auto;
+    letter-spacing: 7.00px;
+    line-height: 21px;
+    min-height: 52px;
+    min-width: 432px;
+    text-align: center;
+    white-space: nowrap;
+    width: auto;
+    color: #427271;
+    font-family: 'SourceSans Pro-Bold', Helvetica, Arial, serif;
+    font-size: 35px;
+    font-style: normal;
+    font-weight: 700;
+    margin-top: 80px;
+    margin-bottom: 10px;
+}
+
+.sign-up-text.light {
+    color: #5DA09E;
+    font-family: 'SourceSans Pro-Regular', Helvetica, Arial, serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    margin-bottom: 30px;
+    margin-top: 0px;
+    text-align: center;
 }
