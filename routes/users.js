@@ -55,7 +55,6 @@ if (validatorErrors.isEmpty()) {
   res.redirect("/list")
 } else {
   const errors = validatorErrors.array().map((error) => error.msg);
-  console.log(errors)
   res.render('sign-up', {
     title: 'Register',
     errors,
