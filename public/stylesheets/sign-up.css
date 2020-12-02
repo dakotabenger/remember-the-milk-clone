@@ -1,7 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap');
 
 h1 {
+    padding: 10px;
     color: #555555;
+}
+
+.logo {
+  width: 40px;
+  height: auto;
+  position: relative;
+  top: 10px;
+  margin-left: 10px;
 }
 
 .sign-up-header {

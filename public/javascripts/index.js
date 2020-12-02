@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', event => {
     const signUpButton = document.getElementById("sign-up-button-id");
     const signUpHeader = document.getElementById("sign-up-header-id");
     const signUpText = document.getElementById("sign-up-text-id");
-    const userInput = document.querySelectorAll("user-input");
+    const userInput = document.querySelectorAll(".user-input");
+
+    console.log(userInput);
 
     toggleButton.addEventListener('click', () => {
         signUpImage.classList.toggle('light');
@@ -19,9 +21,6 @@ document.addEventListener('DOMContentLoaded', event => {
         signUpButton.classList.toggle('light');
         signUpHeader.classList.toggle('light');
         signUpText.classList.toggle('light');
-
-        userInput.classList.toggle('light');
-
-    })
-
-})
+        userInput.forEach(ele => ele.classList.toggle('light'));
+    });
+});
