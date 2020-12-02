@@ -21,18 +21,8 @@ document.addEventListener('DOMContentLoaded', event => {
         userInput.forEach(ele => ele.classList.toggle('light'));
         signUpContainer.forEach(ele => ele.classList.toggle('light'));
         signUpText.forEach(ele => ele.classList.toggle('light'));
+        userInput.forEach(ele => ele.getAttribute("placeholder").classList.toggle('light'))
         signUpButton.classList.toggle('light');
-<<<<<<< HEAD
-=======
-        signUpHeader.classList.toggle('light');
-        signUpText.classList.toggle('light');
-<<<<<<< HEAD
 
->>>>>>> 596a25f1677ca05d783f75e037a823eebc7f145d
-
-=======
-        userInput.forEach(ele => ele.classList.toggle('light'));
-       userInput.forEach(ele => ele.getAttribute("placeholder").classList.toggle('light'))
->>>>>>> 9008a740ecd72f084a13e1ce6d9099c94167d95f
     });
 });
