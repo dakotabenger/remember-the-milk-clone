@@ -4,7 +4,7 @@ append head
   //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/index.css")
   //- add page specific js
-  script(src="/javascripts/index.js" type="module" defer)
+  script(src="/public/javascripts/index.js" type="module" defer)
 
 //- TODO - Turn this into a table
 //- (W11D4 Data-Driven Apps - Part 3)...
@@ -12,6 +12,27 @@ block content
   h1= title
   p Welcome to your Project Skeleton
   form(action="/users/logout", method='post')
-   button(type="submit" ) Log Out
-  //-  input(type="submit" )
+   button(type="submit") Log Out
+  div
+    a(class='btn btn-success' href='/book/add' role='button') Add Book
+  table(class='tasks-table')
+    thead
+      tr
+        th Task Name
+        th Description
+        th Priority
+        th Start Date
+        th End Date
+        th Completed
 
+    tbody
+      each task in tasks
+        tr
+          td= task.name
+          td= task.description
+          td= task.priority
+          td= task.start_date
+          td= task.end_date
+          td= task.completed
+            span
+              input(type="checkbox")

@@ -1,5 +1,6 @@
 window.addEventListener("load", (event) => {
     console.log("hello from javascript!")
+<<<<<<< HEAD
 })
 
 document.addEventListener('DOMContentLoaded', event => {
@@ -28,3 +29,12 @@ document.addEventListener('DOMContentLoaded', event => {
 
     });
 });
+=======
+
+
+
+    document.getElementById('.tasksubmitbutton').addEventListener('click', async(res,req) => {
+        
+    })
+})
+>>>>>>> 777959ce1e47cf5a20039cd05cfc174fe08c65ea
