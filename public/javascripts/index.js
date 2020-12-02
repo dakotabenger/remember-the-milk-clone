@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', event => {
     const signUpButton = document.getElementById("sign-up-button-id");
     const signUpText = document.querySelectorAll(".sign-up-text");
     const userInput = document.querySelectorAll(".user-input");
-    // const placeholder = document.getAttribute("placeholder")
     const errorMsg = document.querySelectorAll(".error-msg")
 
 
@@ -24,7 +23,6 @@ document.addEventListener('DOMContentLoaded', event => {
         userInput.forEach(ele => ele.classList.toggle('light'));
         signUpContainer.forEach(ele => ele.classList.toggle('light'));
         signUpText.forEach(ele => ele.classList.toggle('light'));
-        // userInput.forEach(ele => ele.getAttribute("placeholder").classList.toggle('light'))
         signUpButton.classList.toggle('light');
         errorMsg.forEach(ele => ele.classList.toggle("light"))
 

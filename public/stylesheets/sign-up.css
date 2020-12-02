@@ -5,6 +5,10 @@ h1 {
     color: #555555;
 }
 
+a:hover {
+    font-weight: bold;
+}
+
 .logo {
   width: 40px;
   height: auto;
