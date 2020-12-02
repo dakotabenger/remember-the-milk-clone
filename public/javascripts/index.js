@@ -1,5 +1,6 @@
 window.addEventListener("load", (event) => {
     console.log("hello from javascript!")
+});
 
 document.addEventListener('DOMContentLoaded', event => {
 
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', event => {
         signUpText.forEach(ele => ele.classList.toggle('light'));
         signUpButton.classList.toggle('light');
         errorMsg.forEach(ele => ele.classList.toggle("light"));
+
 
     });
 });
