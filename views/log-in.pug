@@ -8,8 +8,11 @@ block content
 
         div(class="sign-up-container")
             div(class="log-in-container")
-                div(class="errors-container")
                 h1.sign-up-header Remember The Milk
+                    div(class="errors-container")
+                        if errors 
+                            each error in errors
+                                p.error-msg #{error}
                     img(class="logo" src="/media/milk.png")
                     h2.sign-up-text Welcome back! Please login to your account.
                         form(class="log-in-form" action="/users/login" method="post")
