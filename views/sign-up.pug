@@ -8,18 +8,18 @@ block content
         div(class="sign-up-container")
             h1.sign-up-header Remember The Milk
                 h2.sign-up-text Please complete to create your account.
-                    form(method="post" action="/users/sign-up")
+                    form(class="sign-up-form" method="post" action="/users/sign-up")
                         div(class="sign-up-form-items")
                             input(type="hidden" name="_csrf" value=csrfToken)
 
                             input(class="user-input" type="text" placeholder="Username" name="username")
 
-                            input(class="user-input" type="email" placeholder="email" name="email")
+                            input(class="user-input" type="email" placeholder="Email" name="email")
 
                             input(class="user-input" type="password" placeholder="Password" name="password")
 
                             input(class="user-input" type="password" placeholder="Confirm password" name="confirmPassword")
 
-                            input(class="user-input" type="submit" name="submit")
+                            input(class="sign-up-button" type="submit" name="submit")
 
                     a(href="/users/login") Already have an account? Log in here.
