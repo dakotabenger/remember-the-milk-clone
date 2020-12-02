@@ -59,7 +59,7 @@ router.patch("/:id/list/:listId")
 
 // Delete Task from list
 
-router.delete("/:id/list/:listId")
+router.put("/:id/list/")
 
 // Get single Task
 
