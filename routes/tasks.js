@@ -5,7 +5,18 @@ const db = require('../db/models/index')
 const router = express.Router()
 const { check, validationResult } = require('express-validator');
 
-
+const taskValidators = [
+        check('name')
+          .exists({ checkFalsy: true })
+          .withMessage('Please provide a task'),
+        check('description')
+          .custom((value, { req }) => {
+            if (value.length > 100) {
+              throw new Error('Description cannot be more than 100 characters');
+            }
+            return true;
+          }),
+        ];
 
 router.post("/",requireAuth,csrfProtection,taskValidators,asyncHandler(async (req,res) => {
         const validatorErrors = validationResult(req);
