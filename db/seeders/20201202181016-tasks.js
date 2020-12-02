@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Tasks', [
       {
-        list_id: 1,
+        id: 1,
         description: 'Wash Car',
         name: 'Task 1',
         priority: 2,
@@ -13,9 +13,11 @@ module.exports = {
         tag_id: null,
         user_id: 1,
         completed: true,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
-        list_id: 2,
+        id: 2,
         description: 'Wash Car 2',
         name: 'Task 2',
         priority: 3,
@@ -24,9 +26,11 @@ module.exports = {
         tag_id: null,
         user_id: 2,
         completed: true,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
-        list_id: 3,
+        id: 3,
         description: 'Wash Car 3',
         name: 'Task 3',
         priority: 2,
@@ -35,7 +39,11 @@ module.exports = {
         tag_id: null,
         user_id: 1,
         completed: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
+
+
     ], {});
     /*
       Add altering commands here.
