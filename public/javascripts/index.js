@@ -23,15 +23,7 @@ document.addEventListener('DOMContentLoaded', event => {
         signUpContainer.forEach(ele => ele.classList.toggle('light'));
         signUpText.forEach(ele => ele.classList.toggle('light'));
         signUpButton.classList.toggle('light');
-        errorMsg.forEach(ele => ele.classList.toggle("light"))
+        errorMsg.forEach(ele => ele.classList.toggle("light"));
 
     });
 });
-
-
-
-
-    document.getElementById('.tasksubmitbutton').addEventListener('click', async(res,req) => {
-
-    })
-})
