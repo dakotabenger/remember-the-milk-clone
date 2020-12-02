@@ -149,6 +149,10 @@ h1 {
     background-color: #5DA09E;
 }
 
+.user-input.light::placeholder {
+    color: #5DA09E;
+}
+
 .user-input.light {
     height: auto;
     letter-spacing: 0.00px;
