@@ -116,7 +116,7 @@ const showFormButton = document.querySelector(".show-form-button")
          const showTasks = receiveTaskFromServer(json)
 
          });
-
+if (toggleButton) {
     toggleButton.addEventListener('click', () => {
         console.log(errorMsg)
         toggleButton.classList.toggle('light');
@@ -130,6 +130,10 @@ const showFormButton = document.querySelector(".show-form-button")
         signUpText.classList.toggle('light');
 
         errorMsg.forEach(ele => ele.classList.toggle("light"));
+
+
+    });
+}});
 
 
  const receiveTaskFromServer = (data) => {
