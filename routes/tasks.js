@@ -82,7 +82,41 @@ router.delete(
 
 
 // Edit Single task route
-router.patch("/:id")
+router.patch("/:id",requireAuth,asyncHandler(async (req,res,next) => {
+        const taskId = req.params.id
+        const task = await db.Task.findByPk(taskId)
+        if (task) {
+                if (task.user_id !== req.sessions.auth.userId) {
+                        const err = new Error('Unauthorized');
+                        err.status = 401;
+                        err.message = 'You are not authorized to edit this task.';
+                        err.title = 'Unauthorized';
+                        throw err;
+                }
+                if (req.body.description) {
+                        task.description = req.body.description
+                }
+                if (req.body.startDate) {
+                        task.start_date = req.body.startDate
+                }
+                if (req.body.endDate) {
+                        task.end_date = req.body.endDate
+                }
+                if (req.body.listId) {
+                        task.list_id = req.body.listId
+                }
+                if (req.body.tagId) {
+                        task.tag_id = req.body.tagId
+                }
+                if (req.body.priority) {
+                        task.priority = req.body.priority
+                }
+                await task.save()
+                res.json({ task,message:"This task has been edited!" })
+        } else {
+                next(taskNotFoundError(taskId))
+        }
+}))
 
 // Add Task to List
 router.patch("/:id/list/:listId",requireAuth,asyncHandler(async (req,res,next) => {
@@ -126,7 +160,22 @@ router.patch("/:id/list/",requireAuth,asyncHandler(async (req,res,next) => {
 
 // Get single Task
 
-router.get("/:id")
+router.get("/:id",requireAuth,asyncHandler(async (req,res) => {
+        const taskId = req.params.id
+        const task = await db.Task.findByPk(taskId)
+        if (task) {
+                if (task.user_id !== req.sessions.auth.userId) {
+                        const err = new Error('Unauthorized');
+                        err.status = 401;
+                        err.message = 'You are not authorized to view this task';
+                        err.title = 'Unauthorized';
+                        throw err;
+                }
+                res.json({task})
+        } else {
+                next(taskNotFoundError(taskId))
+        }
+}))
 
 
 
