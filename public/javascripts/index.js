@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', event => {
          const showTasks = receiveTaskFromServer(json)
 
          });
-
+if (toggleButton) {
     toggleButton.addEventListener('click', () => {
         console.log(errorMsg)
         toggleButton.classList.toggle('light');
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', event => {
         errorMsg.forEach(ele => ele.classList.toggle("light"));
 
     });
-});
+}});
 
  const receiveTaskFromServer = (data) => {
         const table = document.querySelector(".tasks-table")
