@@ -52,8 +52,8 @@ if (validatorErrors.isEmpty()) {
   const hashedPassword = await bcrypt.hash(req.body.password,salt)
   const newUser = await db.User.create({email: req.body.email,hashedPassword:hashedPassword,createdAt: Date.now(),updatedAt: Date.now()})
   loginUser(req,res,newUser);
-  req.session.save(() => {
-    res.redirect("/list")
+  return req.session.save(() => {
+    res.redirect("/")
   })
 
 } else {
@@ -86,8 +86,8 @@ router.post("/login",csrfProtection,loginValidators,asyncHandler(async (req,res)
 
     if (passwordCheck) {
       loginUser(req,res,user)
-      req.session.save(() => {
-        return res.redirect('/lists');
+      return req.session.save(() => {
+        return res.redirect('/');
       });
     }
   }
@@ -104,6 +104,9 @@ router.post("/login",csrfProtection,loginValidators,asyncHandler(async (req,res)
 }))
 router.post('/logout', (req,res) => {
   logoutUser(req,res)
-  res.redirect('/users/login');
+  return req.session.save(() => {
+    return  res.redirect('/users/login');
+  });
+ 
 })
 module.exports = router;
