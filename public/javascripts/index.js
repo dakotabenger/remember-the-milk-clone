@@ -38,6 +38,8 @@ const showFormButton = document.querySelector(".show-form-button")
         formContainer.hidden = !formContainer.hidden
     });
 
+
+    // error start
     // nameTable.addEventListener("click",async (e) => {
     //     const targetId = e.target.id
     //     const resJSON = await fetch(`/api/task/${targetId}`)
@@ -87,6 +89,7 @@ const showFormButton = document.querySelector(".show-form-button")
     //     taskEle.appendChild(priorityTag)
     //     taskEle.classList.toggle('unhide')
     // })
+    // error end
 
     form.addEventListener('submit',async (e) => {
          e.preventDefault();
@@ -141,8 +144,9 @@ const showFormButton = document.querySelector(".show-form-button")
 
     }
 
-
+    });
     // TO DO
     // Event Listener for checkbox to update task completed boolean and change css class to strikethrough
+
     // Fix Name table event listener
     // Tasks left to complete div with counter

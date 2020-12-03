@@ -33,8 +33,8 @@ block content
       tbody(class='TBD')
         each task in tasks
           tr(class='TBD2')
-            td(id=task.id class="task-td")= task.name
-              span
-                input(type="checkbox" class="completed-checkbox")
+            td(id=task.id class="task-td")
+              input(id="check" type="checkbox" class="completed-checkbox")
+              label=task.name
     div(class="task-view-container-hidden")
   script(src="/javascripts/index.js" type="module" defer)
