@@ -13,8 +13,7 @@ module.exports = {
         references: { model: "Lists" },
       },
       description: {
-        allowNull:false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100)
       },
       name: {
         allowNull:false,
@@ -39,7 +38,8 @@ module.exports = {
         references: { model: "Users" },
       },
       completed: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       createdAt: {
         allowNull: false,

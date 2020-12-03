@@ -55,7 +55,7 @@ app.use(restoreUser);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/tasks', tasksRouter); 
+app.use('api/tasks', tasksRouter); 
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
