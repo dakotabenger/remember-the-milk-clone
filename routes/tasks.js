@@ -27,7 +27,6 @@ router.post("/", requireAuth, taskValidators, asyncHandler(async (req, res) => {
         const userId = req.session.auth.userId
         console.log(userId)
         const { name } = req.body
-        console.log("name")
         if (validatorErrors.isEmpty()) {
                 const newTask = await db.Task.build({ name: name, user_id: userId })
                 if (req.body.description) {
@@ -48,6 +47,7 @@ router.post("/", requireAuth, taskValidators, asyncHandler(async (req, res) => {
                 if (req.body.priority) {
                         newTask.priority = req.body.priority
                 }
+                console.log(newTask)
                 await newTask.save()
                 res.json({ newTask })
 

@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     completed: DataTypes.BOOLEAN
   }, {});
   Task.associate = function(models) {
-Task.hasOne(models.List,{foreignKey:"list_id"})
-Task.hasOne(models.Tag,{foreignKey:"tag_id"})
-Task.belongsTo(models.User,{foreignKey:"user_id"})  };
+Task.belongsTo(models.List,{foreignKey:"list_id"})
+Task.belongsTo(models.Tag,{foreignKey:"tag_id"})
+Task.belongsTo(models.User,{foreignKey:"user_id"}) };
   return Task;
 };
