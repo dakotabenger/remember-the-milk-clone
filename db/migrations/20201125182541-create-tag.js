@@ -23,6 +23,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Date.now()
+      },
+      user_id: {
+        allowNull:false,
+        type: Sequelize.INTEGER,
+        references: { model: "Users" },
       }
     });
   },
