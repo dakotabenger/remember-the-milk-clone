@@ -1,6 +1,7 @@
 to do:
 nav bars for both top and left side
 css for index and list page
+task counter
 figure out how to rename lists
 figure out pop up divs 
 start tag routes
