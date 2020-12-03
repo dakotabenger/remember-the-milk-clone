@@ -164,17 +164,23 @@ router.patch("/:id/list/",requireAuth,asyncHandler(async (req,res,next) => {
 // Get single Task
 
 router.get("/:id",requireAuth,asyncHandler(async (req,res) => {
+        console.log("HERE ONE")
         const taskId = req.params.id
         const task = await db.Task.findByPk(taskId)
+        console.log("taskId",taskId)
+        console.log("task",task)
         if (task) {
-                if (task.user_id !== req.sessions.auth.userId) {
+                console.log("HERE TWO")
+                if (task.user_id !== req.session.auth.userId) {
                         const err = new Error('Unauthorized');
                         err.status = 401;
                         err.message = 'You are not authorized to view this task';
                         err.title = 'Unauthorized';
                         throw err;
                 }
-                res.json({task})
+                console.log("RES",res)
+                const resJSON = res.json({task})
+                console.log("ResJSON",resJSON)
         } else {
                 next(taskNotFoundError(taskId))
         }
