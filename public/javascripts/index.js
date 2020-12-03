@@ -3,7 +3,7 @@ window.addEventListener("load", (event) => {
     console.log("hello from javascript!")
 });
 document.addEventListener('DOMContentLoaded', event => {
-
+    
     const toggleButton = document.getElementById('toggle-button');
     const image = document.querySelectorAll(".image-container");
     const signUpContainer = document.querySelectorAll(".sign-up-container");
@@ -13,18 +13,26 @@ document.addEventListener('DOMContentLoaded', event => {
     const userInput = document.querySelectorAll(".user-input");
     const errorMsg = document.querySelectorAll(".error-msg")
 
-
-    toggleButton.addEventListener('click', () => {
-        toggleButton.classList.toggle('light');
-        signUpHeader.forEach(ele => ele.classList.toggle('light'));
-        image.forEach(ele => ele.classList.toggle('light'));
-        userInput.forEach(ele => ele.classList.toggle('light'));
-        signUpContainer.forEach(ele => ele.classList.toggle('light'));
-        signUpText.forEach(ele => ele.classList.toggle('light'));
-        signUpButton.classList.toggle('light');
-        errorMsg.forEach(ele => ele.classList.toggle("light"));
-
-    });
+    if (toggleButton) {
+        toggleButton.addEventListener('click', () => {
+            console.log(errorMsg)
+            toggleButton.classList.toggle('light');
+            signUpHeader.forEach(ele => ele.classList.toggle('light'));
+            image.forEach(ele => ele.classList.toggle('light'));
+            userInput.forEach(ele => ele.classList.toggle('light'));
+            signUpContainer.forEach(ele => ele.classList.toggle('light'));
+            signUpText.forEach(ele => ele.classList.toggle('light'));
+            signUpButton.classList.toggle('light');
+            signUpHeader.classList.toggle('light');
+            signUpText.classList.toggle('light');
+    
+            errorMsg.forEach(ele => ele.classList.toggle("light"));
+    
+    
+        });
+    };
+    
+    
 });
 
 const form = document.querySelector('.new-task')
@@ -116,6 +124,7 @@ const showFormButton = document.querySelector(".show-form-button")
          const showTasks = receiveTaskFromServer(json)
 
          });
+<<<<<<< HEAD
 // if (toggleButton) {
 //     toggleButton.addEventListener('click', () => {
 //         console.log(errorMsg)
@@ -136,6 +145,8 @@ const showFormButton = document.querySelector(".show-form-button")
 
 // })
 
+=======
+>>>>>>> 9d8564437befe2c364dce68e860ee6c7916b9523
 
 
  const receiveTaskFromServer = (data) => {
@@ -150,7 +161,10 @@ const showFormButton = document.querySelector(".show-form-button")
 
 
 
+<<<<<<< HEAD
     };
+=======
+>>>>>>> 9d8564437befe2c364dce68e860ee6c7916b9523
     // TO DO
     // Event Listener for checkbox to update task completed boolean and change css class to strikethrough
 
