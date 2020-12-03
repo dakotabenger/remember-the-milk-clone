@@ -6,10 +6,11 @@ const router = express.Router()
 
 
 
-router.get('/', requireAuth, asyncHandler(async (req, res) => {
+router.get('/', requireAuth,csrfProtection, asyncHandler(async (req, res) => {
   const user = req.session.auth.userId
-  const tasks = await db.Task.findAll({ where: {user_id: user}, order:[['start_date', 'ASC']]}); //todo cant remember if this is how you get everything for a specific user
-  res.render('index', {title: 'Home',tasks})
+  const tasks = await db.Task.findAll({ where: {user_id: user}, order:[['start_date', 'ASC']]}); 
+  const lists = await db.List.findAll({where:{user_id:user}})
+  res.render('index', {title: 'Home',tasks,lists,csrfToken: req.csrfToken()})
 }));
 
 

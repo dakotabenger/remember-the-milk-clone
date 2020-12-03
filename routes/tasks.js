@@ -61,7 +61,7 @@ router.post("/", requireAuth, taskValidators, asyncHandler(async (req, res) => {
 router.delete(
         "/:id",
         asyncHandler(async (req, res, next) => {
-                const task = await Task.findOne({
+                const task = await db.Task.findOne({
                         where: {
                                 id: req.params.id,
                         },
