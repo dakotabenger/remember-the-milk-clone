@@ -52,8 +52,8 @@ if (validatorErrors.isEmpty()) {
   const hashedPassword = await bcrypt.hash(req.body.password,salt)
   const newUser = await db.User.create({email: req.body.email,hashedPassword:hashedPassword,createdAt: Date.now(),updatedAt: Date.now()})
   loginUser(req,res,newUser);
-  req.session.save(() => {
-    res.redirect("/list")
+  return req.session.save(() => {
+    res.redirect("/")
   })
 
 } else {
@@ -83,11 +83,12 @@ router.post("/login",csrfProtection,loginValidators,asyncHandler(async (req,res)
 
   if (user !== null) {
     const passwordCheck = await bcrypt.compare(password,user.hashedPassword.toString());
-
+    console.log('user exists');
     if (passwordCheck) {
+      console.log('valid password');
       loginUser(req,res,user)
-      req.session.save(() => {
-        return res.redirect('/lists');
+     return req.session.save((err) => {
+        return res.redirect('/');
       });
     }
   }
