@@ -22,10 +22,12 @@ const taskValidators = [
                 .withMessage("Description must be less than 100 characters")
 ];
 
-router.post("/", requireAuth, csrfProtection, taskValidators, asyncHandler(async (req, res) => {
+router.post("/", requireAuth, taskValidators, asyncHandler(async (req, res) => {
         const validatorErrors = validationResult(req);
-        const userId = req.sessions.auth.userId
+        const userId = req.session.auth.userId
+        console.log(userId)
         const { name } = req.body
+        console.log("name")
         if (validatorErrors.isEmpty()) {
                 const newTask = await db.Task.build({ name: name, user_id: userId })
                 if (req.body.description) {
@@ -158,6 +160,7 @@ router.patch("/:id/list/",requireAuth,asyncHandler(async (req,res,next) => {
         }
 }))
 
+
 // Get single Task
 
 router.get("/:id",requireAuth,asyncHandler(async (req,res) => {
@@ -176,6 +179,7 @@ router.get("/:id",requireAuth,asyncHandler(async (req,res) => {
                 next(taskNotFoundError(taskId))
         }
 }))
+
 
 
 

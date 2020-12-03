@@ -4,7 +4,6 @@ append head
   //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/index.css")
   //- add page specific js
-  script(src="/public/javascripts/index.js" type="module" defer)
 
 //- TODO - Turn this into a table
 //- (W11D4 Data-Driven Apps - Part 3)...
@@ -37,14 +36,4 @@ block content
               span
                 input(type="checkbox" class="completed-checkbox")
     div(class="task-view-container-hidden")
-
-          //- td= task.description
-          //- td= task.priority
-          //- td= task.start_date
-          //- td= task.end_date
-          //- td= task.completed
-        //- th Description
-        //- th Priority
-        //- th Start Date
-        //- th End Date
-        //- th Completed
+  script(src="/javascripts/index.js" type="module" defer)
