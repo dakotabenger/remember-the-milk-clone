@@ -5,6 +5,14 @@ const db = require('../db/models/index')
 const router = express.Router()
 const { check, validationResult } = require('express-validator');
 
+const taskNotFoundError = (id) => {
+        const err = Error('Task not found');
+        err.errors = [`Task with id of ${id} could not be found.`];
+        err.title = 'Task not found.';
+        err.status = 404;
+        return err;
+      };
+
 const taskValidators = [
         check('name')
           .exists({ checkFalsy: true })
@@ -55,11 +63,44 @@ router.delete("/:id")
 router.patch("/:id")
 
 // Add Task to List
-router.patch("/:id/list/:listId")
+router.patch("/:id/list/:listId",requireAuth,asyncHandler(async (req,res,next) => {
+        const taskId = req.params.id
+        const listId = req.params.listId
+        const task = await db.Task.findByPk(taskId)
+        if (task) {
+                if (task.user_id !== req.sessions.auth.userId) {
+                        const err = new Error('Unauthorized');
+                        err.status = 401;
+                        err.message = 'You are not authorized to add this task to the choosen list.';
+                        err.title = 'Unauthorized';
+                        throw err;
+                }
+                task.update({list_id:listId})
+                res.json({message:"The task has been added to the list",task})
+        } else {
+                next(taskNotFoundError(taskId))
+        }
+}))
 
 // Delete Task from list
 
-router.patch("/:id/list/")
+router.patch("/:id/list/",requireAuth,asyncHandler(async (req,res,next) => {
+        const taskId = req.params.id
+        const task = await db.Task.findByPk(taskId)
+        if (task) {
+                if (task.user_id !== req.sessions.auth.userId) {
+                        const err = new Error('Unauthorized');
+                        err.status = 401;
+                        err.message = 'You are not authorized to delete this task from the choosen list.';
+                        err.title = 'Unauthorized';
+                        throw err;
+                }
+                task.update({list_id:null})
+                res.json({message: "The task has been deleted!",task})
+        } else {
+                next(taskNotFoundError(taskId))
+        }
+}))
 
 // Get single Task
 
