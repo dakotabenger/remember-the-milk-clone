@@ -12,19 +12,35 @@ document.addEventListener('DOMContentLoaded', event => {
     const signUpText = document.querySelectorAll(".sign-up-text");
     const userInput = document.querySelectorAll(".user-input");
     const errorMsg = document.querySelectorAll(".error-msg")
-    const form = document.querySelector('.new-task')
-    console.log(form)
-    const nameTable = document.querySelectorAll(".task-td")
-    const taskEle = document.querySelector(".task-view-container")
-    const formContainer = document.querySelector(".form-container")
-    const showFormButton = document.querySelector(".show-form-button")
+
+
+    toggleButton.addEventListener('click', () => {
+        toggleButton.classList.toggle('light');
+        signUpHeader.forEach(ele => ele.classList.toggle('light'));
+        image.forEach(ele => ele.classList.toggle('light'));
+        userInput.forEach(ele => ele.classList.toggle('light'));
+        signUpContainer.forEach(ele => ele.classList.toggle('light'));
+        signUpText.forEach(ele => ele.classList.toggle('light'));
+        signUpButton.classList.toggle('light');
+        errorMsg.forEach(ele => ele.classList.toggle("light"));
+
+    });
+});
+
+const form = document.querySelector('.new-task')
+const nameTable = document.querySelectorAll(".task-td")
+const taskEle = document.querySelector(".task-view-container")
+const formContainer = document.querySelector(".form-container")
+const showFormButton = document.querySelector(".show-form-button")
 
 
     showFormButton.addEventListener("click",(e) => {
         e.preventDefault()
         formContainer.hidden = !formContainer.hidden
-    })
+    });
 
+
+    // error start
     // nameTable.addEventListener("click",async (e) => {
     //     const targetId = e.target.id
     //     const resJSON = await fetch(`/api/task/${targetId}`)
@@ -74,6 +90,7 @@ document.addEventListener('DOMContentLoaded', event => {
     //     taskEle.appendChild(priorityTag)
     //     taskEle.classList.toggle('unhide')
     // })
+    // error end
 
     form.addEventListener('submit',async (e) => {
          e.preventDefault();
@@ -100,7 +117,7 @@ document.addEventListener('DOMContentLoaded', event => {
          const showTasks = receiveTaskFromServer(json)
 
          });
-
+if (toggleButton) {
     toggleButton.addEventListener('click', () => {
         console.log(errorMsg)
         toggleButton.classList.toggle('light');
@@ -115,8 +132,10 @@ document.addEventListener('DOMContentLoaded', event => {
 
         errorMsg.forEach(ele => ele.classList.toggle("light"));
 
+
     });
-});
+};
+
 
  const receiveTaskFromServer = (data) => {
         const table = document.querySelector(".tasks-table")
@@ -134,5 +153,6 @@ document.addEventListener('DOMContentLoaded', event => {
 
     // TO DO
     // Event Listener for checkbox to update task completed boolean and change css class to strikethrough
+
     // Fix Name table event listener
     // Tasks left to complete div with counter
