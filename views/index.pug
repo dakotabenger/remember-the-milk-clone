@@ -13,34 +13,38 @@ block content
   p Welcome to your Project Skeleton
   form(action="/users/logout", method='post')
    button(type="submit") Log Out
-  div
-  form(method="post" action="/users/sign-up" class='new-task')
-    input(type="hidden" name="_csrf" value=csrfToken)
-    input(class='user-input' type='text' placeholder='Task Name' name='name' value=name)
-    input(class='user-input' type='text' placeholder='Description' name='description' value=description)
-    input(class='user-input' type='number' placeholder='Priority' name='priority' value=priority)
-    input(class='user-input' type='date' placeholder='Start Date' name='start_date' value=start_date)
-    input(class='user-input' type='date' placeholder='End Date' name='end_date' value=end_date)
-    input(class='user-input' type='checkbox' placeholder='Completed' name='completed' value=completed)
-    button(class='user-input tasksubmitbutton' type='submit' name='submit') Add Task
-  table(class='tasks-table')
-    thead
-      tr
-        th Task Name
-        th Description
-        th Priority
-        th Start Date
-        th End Date
-        th Completed
+  div(class="errors-container")
+  button(class="show-form-button") Create New Task
+  div(class="form-container" hidden)
+    form(class='new-task')
+      input(class='user-input' id="name" type='text' placeholder='Task Name' name='name')
+      input(class='user-input' type='text' placeholder='Description' name='description')
+      input(class='user-input' type='number' placeholder='Priority' name='priority' )
+      input(class='user-input' type='date' placeholder='Start Date' name='start_date' )
+      input(class='user-input' type='date' placeholder='End Date' name='end_date' )
+      input(class='user-input' type='checkbox' placeholder='Completed' name='completed')
+      button(class='user-input tasksubmitbutton' type='submit' name='submit') Add Task
+  div(class="table-container")
+    table(class='tasks-table')
+      thead
+        tr
+          th Task Name
 
-    tbody(class='TBD')
-      each task in tasks
-        tr(class='TBD2')
-          td= task.name
-          td= task.description
-          td= task.priority
-          td= task.start_date
-          td= task.end_date
-          td= task.completed
-            span
-              input(type="checkbox")
+      tbody(class='TBD')
+        each task in tasks
+          tr(class='TBD2')
+            td(id=task.id class="task-td")= task.name
+              span
+                input(type="checkbox" class="completed-checkbox")
+    div(class="task-view-container-hidden")
+
+          //- td= task.description
+          //- td= task.priority
+          //- td= task.start_date
+          //- td= task.end_date
+          //- td= task.completed
+        //- th Description
+        //- th Priority
+        //- th Start Date
+        //- th End Date
+        //- th Completed
