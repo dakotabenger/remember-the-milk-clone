@@ -52,7 +52,10 @@ if (validatorErrors.isEmpty()) {
   const hashedPassword = await bcrypt.hash(req.body.password,salt)
   const newUser = await db.User.create({email: req.body.email,hashedPassword:hashedPassword,createdAt: Date.now(),updatedAt: Date.now()})
   loginUser(req,res,newUser);
-  res.redirect("/list")
+  req.session.save(() => {
+    res.redirect("/list")
+  })
+
 } else {
   const errors = validatorErrors.array().map((error) => error.msg);
   res.render('sign-up', {
@@ -83,7 +86,9 @@ router.post("/login",csrfProtection,loginValidators,asyncHandler(async (req,res)
 
     if (passwordCheck) {
       loginUser(req,res,user)
+      req.session.save(() => {
         return res.redirect('/lists');
+      });
     }
   }
   errors.push('Failed Login');

@@ -36,7 +36,7 @@ const showFormButton = document.querySelector(".show-form-button")
     showFormButton.addEventListener("click",(e) => {
         e.preventDefault()
         formContainer.hidden = !formContainer.hidden
-    })
+    });
 
     // nameTable.addEventListener("click",async (e) => {
     //     const targetId = e.target.id
@@ -114,6 +114,20 @@ const showFormButton = document.querySelector(".show-form-button")
 
          });
 
+    toggleButton.addEventListener('click', () => {
+        console.log(errorMsg)
+        toggleButton.classList.toggle('light');
+        signUpHeader.forEach(ele => ele.classList.toggle('light'));
+        image.forEach(ele => ele.classList.toggle('light'));
+        userInput.forEach(ele => ele.classList.toggle('light'));
+        signUpContainer.forEach(ele => ele.classList.toggle('light'));
+        signUpText.forEach(ele => ele.classList.toggle('light'));
+        signUpButton.classList.toggle('light');
+        signUpHeader.classList.toggle('light');
+        signUpText.classList.toggle('light');
+
+        errorMsg.forEach(ele => ele.classList.toggle("light"));
+
 
  const receiveTaskFromServer = (data) => {
         const table = document.querySelector(".tasks-table")
@@ -131,3 +145,4 @@ const showFormButton = document.querySelector(".show-form-button")
     // TO DO
     // Event Listener for checkbox to update task completed boolean and change css class to strikethrough
     // Fix Name table event listener
+    // Tasks left to complete div with counter
