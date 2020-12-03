@@ -1,1 +1,7 @@
+.task-view-container {
+    display: block;
+}
 
+.hidden {
+    display: none;
+}
