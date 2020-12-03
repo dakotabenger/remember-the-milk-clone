@@ -12,12 +12,26 @@ document.addEventListener('DOMContentLoaded', event => {
     const signUpText = document.querySelectorAll(".sign-up-text");
     const userInput = document.querySelectorAll(".user-input");
     const errorMsg = document.querySelectorAll(".error-msg")
-    const form = document.querySelector('.new-task')
-    console.log(form)
-    const nameTable = document.querySelectorAll(".task-td")
-    const taskEle = document.querySelector(".task-view-container")
-    const formContainer = document.querySelector(".form-container")
-    const showFormButton = document.querySelector(".show-form-button")
+
+
+    toggleButton.addEventListener('click', () => {
+        toggleButton.classList.toggle('light');
+        signUpHeader.forEach(ele => ele.classList.toggle('light'));
+        image.forEach(ele => ele.classList.toggle('light'));
+        userInput.forEach(ele => ele.classList.toggle('light'));
+        signUpContainer.forEach(ele => ele.classList.toggle('light'));
+        signUpText.forEach(ele => ele.classList.toggle('light'));
+        signUpButton.classList.toggle('light');
+        errorMsg.forEach(ele => ele.classList.toggle("light"));
+
+    });
+});
+
+const form = document.querySelector('.new-task')
+const nameTable = document.querySelectorAll(".task-td")
+const taskEle = document.querySelector(".task-view-container")
+const formContainer = document.querySelector(".form-container")
+const showFormButton = document.querySelector(".show-form-button")
 
     showFormButton.addEventListener("click",(e) => {
         e.preventDefault()
@@ -46,7 +60,7 @@ document.addEventListener('DOMContentLoaded', event => {
     //         <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
     //         </svg>`
     //     }
-        
+
     //     const startDateTag = document.createElement("p")
     //     startDateTag.innerHTML(startDate)
     //     const endDateTag = document.createElement("p")
@@ -83,10 +97,10 @@ document.addEventListener('DOMContentLoaded', event => {
          const startDate = formData.get('start_date')
          const endDate = formData.get("end_date");
          const completed = formData.get("completed")
- 
-        
-        const reqBody = {  name, description, priority, startDate, endDate, completed } 
-        
+
+
+        const reqBody = {  name, description, priority, startDate, endDate, completed }
+
          const res = await fetch('/api/tasks', {
              credentials:"same-origin",
              method:'POST',
@@ -97,45 +111,23 @@ document.addEventListener('DOMContentLoaded', event => {
          const json = await res.json()
          form.reset()
          const showTasks = receiveTaskFromServer(json)
-         
+
          });
 
-    toggleButton.addEventListener('click', () => {
-        console.log(errorMsg)
-        toggleButton.classList.toggle('light');
-        signUpHeader.forEach(ele => ele.classList.toggle('light'));
-        image.forEach(ele => ele.classList.toggle('light'));
-        userInput.forEach(ele => ele.classList.toggle('light'));
-        signUpContainer.forEach(ele => ele.classList.toggle('light'));
-        signUpText.forEach(ele => ele.classList.toggle('light'));
-        signUpButton.classList.toggle('light');
-        errorMsg.forEach(ele => ele.classList.toggle("light"));
-
-    });
-});
 
  const receiveTaskFromServer = (data) => {
         const table = document.querySelector(".tasks-table")
-        const newTr = document.createElement("tr")     
+        const newTr = document.createElement("tr")
         const newTd = document.createElement("td")
         newTd.setAttribute("id",`${data.newTask.id}`)
         newTd.innerHTML = `${data.newTask.name}`
         newTr.appendChild(newTd)
         table.appendChild(newTr)
 
-            
+
     }
-      
+
 
     // TO DO
     // Event Listener for checkbox to update task completed boolean and change css class to strikethrough
     // Fix Name table event listener
-    
-    
-    
-    
-    
-  
-
-    
-
