@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', event => {
             }
         } 
             const closeButton = document.createElement("button")
+            closeButton.setAttribute("type","submit")
             closeButton.innerHTML = "Close"
             taskEle.appendChild(namePtag)
             taskEle.appendChild(descriptionPtag)
@@ -114,6 +115,7 @@ document.addEventListener('DOMContentLoaded', event => {
             taskEle.appendChild(closeButton)
             closeButton.addEventListener("submit", (e) => {
                 e.preventDefault()
+                console.log("here")
                 taskEle.classList.toggle("hidden")
             })
         })
