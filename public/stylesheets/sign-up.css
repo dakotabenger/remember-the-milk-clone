@@ -124,6 +124,11 @@ a:hover {
     color: #427271;
 }
 
+.error-msg {
+    color: #0a0c10;
+    font-size: 14px;
+}
+
 /* light mode  */
 .image-container.light {
     background-color: white;
@@ -211,10 +216,7 @@ a:hover {
     color: #5DA09E;
 }
 
-.error-msg {
-    color: #0a0c10
-}
-
 .error-msg.light {
-    color: #91F9EF;
+    color: #5DA09E;
+    font-size: 14px;
 }
