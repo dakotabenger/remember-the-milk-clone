@@ -28,10 +28,57 @@ document.addEventListener('DOMContentLoaded', event => {
     });
 });
 
+// Copy paste from here -->
+ const receiveTasksFromServer = (data) => {
+        const formName = document.querySelector('name')
+        formName.innerHTML = '';
+        data.formName.forEach((taskName, i) => {
+            const newTaskRow = document.createElement('tr');
+            newTaskRow.className = 'tbd'  //change class name
 
+            const newTaskTD = document.createElement('td')
+            newTaskTD.appendChild(document.createTextNode(taskName))
 
+            //adding a delete button
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'delete-button';
+            deleteButton.appendChild(document.createTextNode('Delete'));
+            deleteButton.setAttribute('id', i);
+            
+            newTaskRow.appendChild(newTaskTD);
+            newTaskRow.appendChild(deleteButton);
+            formName.appendChild(newTaskRow);
+    });
+      
+    }
+    
+    
+    document.querySelector('.tasksubmitbutton').addEventListener('click', (e) => {
+        e.preventDefault();
+        const createNewTask = document.querySelector('.new-task');
+        const formData = new FormData(createNewTask);
+        const formName = formData.get("name")
+        const formDescription = formData.get('description')
+        const formPriority = formData.get('priority')
+        const formStartDate = formData.get('start_date')
+        const formEndDate = formData.get("end_date");
+        const formCompleted = formData.get("completed")
 
-    document.getElementById('.tasksubmitbutton').addEventListener('click', async(res,req) => {
+       
 
-    })
+       
+        const res = await fetch('/api/task', {
+            method:'POST',
+            body: JSON.stringify({  //probably need to change this part
+              formName, formDescription, formPriority, formStartDate, formEndDate, formCompleted
+            })
+        })
+        const json = await res.json()
+        const resetForm = await createNewTask.reset()
+        const showTasks = await receiveTasksFromServer(json)
+        
+        });
+// to here  <--
+
+    
 })

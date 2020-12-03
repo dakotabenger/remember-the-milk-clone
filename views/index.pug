@@ -14,7 +14,15 @@ block content
   form(action="/users/logout", method='post')
    button(type="submit") Log Out
   div
-    a(class='btn btn-success' href='/book/add' role='button') Add Book
+  form(method="post" action="/users/sign-up" class='new-task')
+    input(type="hidden" name="_csrf" value=csrfToken)
+    input(class='user-input' type='text' placeholder='Task Name' name='name' value=name)
+    input(class='user-input' type='text' placeholder='Description' name='description' value=description)
+    input(class='user-input' type='number' placeholder='Priority' name='priority' value=priority)
+    input(class='user-input' type='date' placeholder='Start Date' name='start_date' value=start_date)
+    input(class='user-input' type='date' placeholder='End Date' name='end_date' value=end_date)
+    input(class='user-input' type='checkbox' placeholder='Completed' name='completed' value=completed)
+    button(class='user-input tasksubmitbutton' type='submit' name='submit') Add Task
   table(class='tasks-table')
     thead
       tr
@@ -25,9 +33,9 @@ block content
         th End Date
         th Completed
 
-    tbody
+    tbody(class='TBD')
       each task in tasks
-        tr
+        tr(class='TBD2')
           td= task.name
           td= task.description
           td= task.priority
