@@ -23,10 +23,10 @@ router.get("/:id",requireAuth,asyncHandler(async (req,res,next) => {
     const list = await db.List.findByPk(listId)
     const lists = await db.List.findAll()
     const listTasks = await db.Task.findAll({where: {list_id:listId}})
-    const data = {list,lists,listTasks} 
+    const data = {list,lists,listTasks}
     if (list) {
         if (list.user_id !== req.sessions.auth.userId) {
-                const err = new Error('Unauthorized');
+                const err = new Error('Unauthorized'); //*tag NOT Found
                 err.status = 401;
                 err.message = 'You are not authorized to view this task';
                 err.title = 'Unauthorized';
@@ -52,14 +52,14 @@ router.post("/",requireAuth,csrfProtection,asyncHandler(async (req,res) => {
           })
       } else {
         const errors = validatorErrors.array().map((error) => error.msg);
-        const tasks = await db.Task.findAll({ where: {user_id: user}, order:[['start_date', 'ASC']]}); 
+        const tasks = await db.Task.findAll({ where: {user_id: user}, order:[['start_date', 'ASC']]});
         res.render('index', {
           errors,
           lists,
           tasks,
           csrfToken: req.csrfToken(),
         })
-      
+
       }
 }))
 
