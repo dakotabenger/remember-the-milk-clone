@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', event => {
     const formContainer = document.querySelector(".form-container")
     const showFormButton = document.querySelector(".show-form-button")
 
+
     showFormButton.addEventListener("click",(e) => {
         e.preventDefault()
         formContainer.hidden = !formContainer.hidden
@@ -130,9 +131,8 @@ document.addEventListener('DOMContentLoaded', event => {
     }
 
 
+
     // TO DO
     // Event Listener for checkbox to update task completed boolean and change css class to strikethrough
     // Fix Name table event listener
     // Tasks left to complete div with counter
-
-   
