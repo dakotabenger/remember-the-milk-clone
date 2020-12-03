@@ -5,6 +5,10 @@ h1 {
     color: #555555;
 }
 
+a:hover {
+    font-weight: bold;
+}
+
 .logo {
   width: 40px;
   height: auto;
@@ -120,6 +124,11 @@ h1 {
     color: #427271;
 }
 
+.error-msg {
+    color: #0a0c10;
+    font-size: 14px;
+}
+
 /* light mode  */
 .image-container.light {
     background-color: white;
@@ -205,4 +214,9 @@ h1 {
 
 ::placeholder.light {
     color: #5DA09E;
+}
+
+.error-msg.light {
+    color: #5DA09E;
+    font-size: 14px;
 }

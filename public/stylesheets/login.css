@@ -1,0 +1,7 @@
+.error-msg {
+    color: #0a0c10
+}
+
+.error-msg.light {
+    color: #91F9EF;
+}
