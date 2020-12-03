@@ -75,3 +75,7 @@
   .nav-bar-two .search-container button:hover {
     background: #ccc;
   }
+
+  input:checked + label {
+    text-decoration: line-through;
+}
