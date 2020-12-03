@@ -116,24 +116,26 @@ const showFormButton = document.querySelector(".show-form-button")
          const showTasks = receiveTaskFromServer(json)
 
          });
-if (toggleButton) {
-    toggleButton.addEventListener('click', () => {
-        console.log(errorMsg)
-        toggleButton.classList.toggle('light');
-        signUpHeader.forEach(ele => ele.classList.toggle('light'));
-        image.forEach(ele => ele.classList.toggle('light'));
-        userInput.forEach(ele => ele.classList.toggle('light'));
-        signUpContainer.forEach(ele => ele.classList.toggle('light'));
-        signUpText.forEach(ele => ele.classList.toggle('light'));
-        signUpButton.classList.toggle('light');
-        signUpHeader.classList.toggle('light');
-        signUpText.classList.toggle('light');
+// if (toggleButton) {
+//     toggleButton.addEventListener('click', () => {
+//         console.log(errorMsg)
+//         toggleButton.classList.toggle('light');
+//         signUpHeader.forEach(ele => ele.classList.toggle('light'));
+//         image.forEach(ele => ele.classList.toggle('light'));
+//         userInput.forEach(ele => ele.classList.toggle('light'));
+//         signUpContainer.forEach(ele => ele.classList.toggle('light'));
+//         signUpText.forEach(ele => ele.classList.toggle('light'));
+//         signUpButton.classList.toggle('light');
+//         signUpHeader.classList.toggle('light');
+//         signUpText.classList.toggle('light');
 
-        errorMsg.forEach(ele => ele.classList.toggle("light"));
+//         errorMsg.forEach(ele => ele.classList.toggle("light"));
 
 
-    });
-}});
+// });
+
+// })
+
 
 
  const receiveTaskFromServer = (data) => {
@@ -146,9 +148,9 @@ if (toggleButton) {
         table.appendChild(newTr)
 
 
-    }
 
-    });
+
+    };
     // TO DO
     // Event Listener for checkbox to update task completed boolean and change css class to strikethrough
 
