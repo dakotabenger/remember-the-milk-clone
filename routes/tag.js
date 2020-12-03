@@ -15,12 +15,9 @@ const tagNotFoundError = (id) => {
   };
 
   router.get("/:id",requireAuth,asyncHandler(async (req,res,next) => {
-
     const tagId = req.params.id
     const tag = await db.Tag.findByPk(listId)
-    const tags = await db.Tag.findAll({where: {
-
-    }})
+    const tags = await db.Tag.findAll({where: {tag_id:req.params.id}})
     const Lists = await db.List.findAll()
     const listTasks = await db.Task.findAll({where: {list_id:listId}})
     const data = {list,lists,listTasks}
@@ -33,8 +30,15 @@ const tagNotFoundError = (id) => {
                 err.title = 'Unauthorized';
                 throw err;
         }
-        renderListPage(req,res,next,data)
+        renderTagPage(req,res,next,data)
 } else {
-        next(listNotFoundError(listId))
+        next(tagNotFoundError(tagId))
 }
+}))
+router.delete("/:id",requireAuth,asyncHandler(async (req,res) => {
+    const tag = await db.Tag.findOne({
+        where: {
+                id: req.params.id,
+        },
+});
 }))
