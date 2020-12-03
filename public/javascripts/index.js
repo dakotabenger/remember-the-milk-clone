@@ -134,3 +134,5 @@ document.addEventListener('DOMContentLoaded', event => {
     // Event Listener for checkbox to update task completed boolean and change css class to strikethrough
     // Fix Name table event listener
     // Tasks left to complete div with counter
+
+   
