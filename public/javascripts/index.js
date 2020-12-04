@@ -12,7 +12,9 @@ document.addEventListener('DOMContentLoaded', event => {
     const signUpButton = document.getElementById("sign-up-button-id");
     const signUpText = document.querySelectorAll(".sign-up-text");
     const userInput = document.querySelectorAll(".user-input");
-    const errorMsg = document.querySelectorAll(".error-msg")
+    const errorMsg = document.querySelectorAll(".error-msg");
+    const hamburgerMenu = document.getElementById("hamburger-menu");
+    const navLinks = document.getElementsByClassName("nav-links")[0];
 
     if (toggleButton) {
         toggleButton.addEventListener('click', () => {
@@ -31,6 +33,10 @@ document.addEventListener('DOMContentLoaded', event => {
 
         });
     };
+
+    hamburgerMenu.addEventListener('click', event => {
+        navLinks.classList.toggle('open-menu')
+    })
 
     const form = document.querySelector('.new-task')
     const nameTableCells = document.querySelectorAll(".task-td")
