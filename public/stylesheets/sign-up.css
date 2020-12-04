@@ -9,8 +9,17 @@ input:checked + label {
     text-decoration: line-through;
 }
 
+.switch-page {
+ text-decoration: none;
+ color: white;
+}
+
 a:hover {
     font-weight: bold;
+}
+
+.switch-page:hover {
+    color: white;
 }
 
 
@@ -18,7 +27,7 @@ a:hover {
   width: 40px;
   height: auto;
   position: relative;
-  top: 10px;
+  bottom: 10px;
   margin-left: 10px;
   filter: drop-shadow(1px 1px 3px #404040);
 }
@@ -122,7 +131,7 @@ a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     bottom: 30px;
     right: 30px;
     background-color: white;

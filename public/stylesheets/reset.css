@@ -1,6 +1,8 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  position: relative;
+  height: 100%;
 }
 
 a {
@@ -24,4 +26,9 @@ body, header, nav {
 
 h1 {
   font-size: 2rem;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
 }
