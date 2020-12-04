@@ -2,7 +2,7 @@ extends layout
 
 block content
     h1= Lists
-    p Add to List
+    p Add to Tags
     div(class="lists-container")
     button(class="show-form-button" type="submit")
 
@@ -15,7 +15,7 @@ block content
             input(class='user-input' type='date' placeholder='Start Date' name='start_date' )
             input(class='user-input' type='date' placeholder='End Date' name='end_date' )
             input(class='user-input' type='checkbox' placeholder='Completed' name='completed')
-            input(class='user-input' value=`${list.id}` hidden)
+            input(class='user-input' value=`${tag.id}` hidden)
             button(class='user-input tasksubmitbutton' type='submit' name='submit') Add Task
 
     div(class="lists")
