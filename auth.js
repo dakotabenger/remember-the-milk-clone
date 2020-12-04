@@ -38,9 +38,12 @@ const requireAuth = (req, res, next) => {
   }
   return next();
 }
+
+// const userId = req.session.auth.userId
   module.exports = {
     loginUser,
     restoreUser,
     logoutUser,
-    requireAuth
+    requireAuth,
+    // userId
   };
