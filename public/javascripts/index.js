@@ -4,7 +4,7 @@
 
 // });
 document.addEventListener('DOMContentLoaded', event => {
-    
+
     const toggleButton = document.getElementById('toggle-button');
     const image = document.querySelectorAll(".image-container");
     const signUpContainer = document.querySelectorAll(".sign-up-container");
@@ -25,13 +25,13 @@ document.addEventListener('DOMContentLoaded', event => {
             signUpButton.classList.toggle('light');
             signUpHeader.classList.toggle('light');
             signUpText.classList.toggle('light');
-    
+
             errorMsg.forEach(ele => ele.classList.toggle("light"));
-    
-    
+
+
         });
     };
-    
+
     const form = document.querySelector('.new-task')
     const nameTableCells = document.querySelectorAll(".task-td")
     const taskEle = document.querySelector(".task-view-container")
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', event => {
                 <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                 </svg>`
             }
-        } 
+        }
             const closeButton = document.createElement("button")
             closeButton.setAttribute("type","submit")
             closeButton.innerHTML = "Close"
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', event => {
         })
         })
         // error end
-    
+
         form.addEventListener('submit',async (e) => {
              e.preventDefault();
              const formData = new FormData(form);
@@ -133,10 +133,10 @@ document.addEventListener('DOMContentLoaded', event => {
              const startDate = formData.get('start_date')
              const endDate = formData.get("end_date");
              const completed = formData.get("completed")
-    
-    
+
+
             const reqBody = {  name, description, priority, startDate, endDate, completed }
-    
+
              const res = await fetch('/api/tasks', {
                  credentials:"same-origin",
                  method:'POST',
@@ -146,9 +146,9 @@ document.addEventListener('DOMContentLoaded', event => {
              const json = await res.json()
              form.reset()
              const showTasks = receiveTaskFromServer(json)
-    
+
              });
-    
+
 });
 
 
