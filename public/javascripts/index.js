@@ -1,15 +1,11 @@
 
-// window.addEventListener("load", (event) => {
-    //     console.log("hello from javascript!")
-    
-    // });
     document.addEventListener('DOMContentLoaded', event => {
         const navLinks = document.querySelector(".nav-links")
         const hamburgerMenu = document.querySelector(".menu-icon")
         console.log(hamburgerMenu)
             hamburgerMenu.addEventListener('click', event => {
                 navLinks.classList.toggle('open-menu')
-            })
+    
     const toggleButton = document.getElementById('toggle-button');
     const image = document.querySelectorAll(".image-container");
     const signUpContainer = document.querySelectorAll(".sign-up-container");
@@ -174,17 +170,6 @@
             newTd.innerHTML = `${data.newTask.name}`
             newTr.appendChild(newTd)
             table.appendChild(newTr)
-    
-    
-    
-    
-        };
-});
-
-
-
-
-    // TO DO
-    // Event Listener for checkbox to update task completed boolean and change css class to strikethrough
-    // Tasks left to complete div with counter
-
+     });
+   });
+   
