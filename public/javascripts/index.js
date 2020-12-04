@@ -170,6 +170,6 @@
             newTd.innerHTML = `${data.newTask.name}`
             newTr.appendChild(newTd)
             table.appendChild(newTr)
-     });
+     }});
    });
    
