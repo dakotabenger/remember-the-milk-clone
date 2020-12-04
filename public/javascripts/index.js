@@ -3,9 +3,8 @@
         const navLinks = document.querySelector(".nav-links")
         const hamburgerMenu = document.querySelector(".menu-icon")
         console.log(hamburgerMenu)
-            hamburgerMenu.addEventListener('click', event => {
-                navLinks.classList.toggle('open-menu')
-    
+
+
     const toggleButton = document.getElementById('toggle-button');
     const image = document.querySelectorAll(".image-container");
     const signUpContainer = document.querySelectorAll(".sign-up-container");
@@ -33,8 +32,10 @@
         });
     };
 
-    
-    
+    hamburgerMenu.addEventListener('click', event => {
+        navLinks.classList.toggle('open-menu')
+    });
+
     const form = document.querySelector('.new-task')
     const nameTableCells = document.querySelectorAll(".task-td")
     const taskEle = document.querySelector(".task-view-container")
@@ -127,15 +128,15 @@
                 taskEle.appendChild(priorityTag)
                 taskEle.appendChild(closeButton)
             })
-        })              
+        })
         closeButton.addEventListener("click", (e) => {
                             e.preventDefault()
                             e.stopPropagation()
                             taskEle.textContent = ""
                             taskEle.classList.toggle("hidden")
                         })
-            
-    
+
+
             form.addEventListener('submit',async (e) => {
                  e.preventDefault();
                  const formData = new FormData(form);
@@ -145,10 +146,10 @@
                  const startDate = formData.get('start_date')
                  const endDate = formData.get("end_date");
                  const completed = formData.get("completed")
-    
-    
+
+
                 const reqBody = {  name, description, priority, startDate, endDate, completed }
-    
+
                  const res = await fetch('/api/tasks', {
                      credentials:"same-origin",
                      method:'POST',
@@ -158,10 +159,10 @@
                  const json = await res.json()
                  form.reset()
                  const showTasks = receiveTaskFromServer(json)
-    
+
                  });
-    
-    
+
+
      const receiveTaskFromServer = (data) => {
             const table = document.querySelector(".tasks-table")
             const newTr = document.createElement("tr")
@@ -171,5 +172,3 @@
             newTr.appendChild(newTd)
             table.appendChild(newTr)
      }});
-   });
-   
