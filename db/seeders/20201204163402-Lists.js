@@ -1,32 +1,26 @@
 'use strict';
-const bcrypt = require('bcryptjs');
-const password = 'password';
-const hash = bcrypt.hashSync(password, 10)
 const faker = require("faker")
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const seedArray = []
-    const demoUser = {
-      id: 1,
-        email: "demo@dftm.com",
-        hashedPassword: hash,
-        createdAt: new Date(),
-        updatedAt: new Date()
-    }
-    seedArray.push(demoUser)
-    for (let i = 2; i < 16; i++) {
+    const seedArray = [];
+    for (let i = 1; i < 26; i++ ) {
+      let userId = 0
+      if (i >= 15) {
+        userId = 1
+      } else {
+        userId++
+      }
       const seedData = {
         id: i,
-        email: faker.internet.email(),
-        hashedPassword: hash,
+        name: faker.lorem.word(),
+        user_id: userId,
         createdAt: new Date(),
         updatedAt: new Date()
+
       }
       seedArray.push(seedData)
     }
-    return queryInterface.bulkInsert('Users',seedArray, {});
-
+    return queryInterface.bulkInsert('Lists', seedArray, {});
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
@@ -40,7 +34,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Users', null, {});
+    return queryInterface.bulkDelete('Lists', null, {});
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.
