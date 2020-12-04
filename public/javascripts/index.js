@@ -68,8 +68,6 @@ const closeButton = document.createElement("button")
             })
             const res = await resJSON.json();
             const {name,description,completed,start_date,end_date,priority,id} = res.task
-            const dateString = start_date.toDateString()
-            console.log(dateString)
             const namePtag = document.createElement("p")
             const descriptionPtag = document.createElement("p")
             namePtag.innerHTML = `Task Name: ${name}`
