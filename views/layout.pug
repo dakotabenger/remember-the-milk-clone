@@ -2,7 +2,7 @@ doctype html
 html
   head
       block head
-        title="Express Starter App"
+        title="Remember The Milk"
         meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
         link(rel='stylesheet' href='/stylesheets/reset.css')
         link(rel="stylesheet", href="/stylesheets/sign-up.css")
@@ -16,43 +16,72 @@ html
           x.classList.toggle("change");
           }
   body
-    nav.top-nav
-      .navbar-div-one
-        a.brand-link(href="/") What's Next?
-        div(class="menu-container" onclick="toggleMenuButton(this)")
-          div(class="bar1 bars")
-          div(class="bar2 bars")
-          div(class="bar3 bars")
-      .navbar-div-two
-        div(class="search-container")
-          form(action="/search" method="post")
-            input(type="text" placeholder="Search.." name="search")
-            button(type="submit") Search
-      .navbar-div-three
-        form(action="/users/logout" method="post")  
-          button(class="logout-button" type="submit") Logout
-    nav.left-nav
-      .navbar-div-one
-        a.inbox(href="/")
-      .navbar-div-two
-        span.list-menu Lists
-          //- to do: add a button that opens up a list form modal
-          if lists
-            ul 
-              each list in lists
-                li
-                  a(href=`/lists/${list.id}`)=list.name
-      .navbar-div-three
-        span.tag-menu Tags
-          //- to do: add a button that opens a modal for creating a tag      
-          if tags
-            ul
-              each tag in tags
-                li
-                  a(href=`/lists/${tag.id}`)=tag.name
-              
-                  
+    nav.navbar
+      div.menu-icon
+        svg.bar(style="width:24px;height:24px" viewBox="0 0 24 24")
+          path(fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z")
+        div.nav-links
+          ul
+            li: h1.nav-header Remeber The Milk
+            li: a.nav-link(href="/") All Tasks
+            li: a.nav-link(href="/") Tomorrow
+            li: a.nav-link(href="/") This Week
 
-      
+            li: a.nav-link(href="/") Lists
+              if lists
+                ul
+                  each list in lists
+                    li
+                      a(href=`/lists/${list.id}`)=list.name
+            li: a.nav-link(href="/") Tags
+            li: a.nav-link(href="/users/login") Log Out
+      div(class="menu-container" onclick="toggleMenuButton(this)")
+        div(class="bar1 bars")
+        div(class="bar2 bars")
+        div(class="bar3 bars")
+      div(class="search-container")
+        form(action="/search" method="post")
+          input(type="text" placeholder="Search.." name="search")
+          button(type="submit") Search
+
+
+
+      //-   div.navbar-div-one
+      //-     a.brand-link(href="/") What's Next?
+      //-     div(class="menu-container" onclick="toggleMenuButton(this)")
+      //-       div(class="bar1 bars")
+      //-       div(class="bar2 bars")
+      //-       div(class="bar3 bars")
+      //-   .navbar-div-two
+      //-     div(class="search-container")
+      //-       form(action="/search" method="post")
+      //-         input(type="text" placeholder="Search.." name="search")
+      //-         button(type="submit") Search
+      //-   .navbar-div-three
+      //-     form(action="/users/logout" method="post")
+      //-       button(class="logout-button" type="submit") Logout
+      //- nav.left-nav
+      //-   .navbar-div-one
+      //-     a.inbox(href="/")
+      //-   .navbar-div-two
+      //-     span.list-menu Lists
+      //-       //- to do: add a button that opens up a list form modal
+      //-       if lists
+      //-         ul
+      //-           each list in lists
+      //-             li
+      //-               a(href=`/lists/${list.id}`)=list.name
+      //-   .navbar-div-three
+      //-     span.tag-menu Tags
+      //-       //- to do: add a button that opens a modal for creating a tag
+      //-       if tags
+      //-         ul
+      //-           each tag in tags
+      //-             li
+      //-               a(href=`/lists/${tag.id}`)=tag.name
+
+
+
+
     block content
     //- To Do: add the nav bars(up top for search and logout, left side for index and lists)
