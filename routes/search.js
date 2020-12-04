@@ -17,8 +17,8 @@ router.get('/', requireAuth,csrfProtection, asyncHandler(async (req, res) => {
           }
     }
       , order:[['start_date', 'ASC']]}); 
-  console.log(tasks,"TASKS YO!")
   const lists = await db.List.findAll({where:{user_id:user}})
-  console.log(lists,"Some mofoing lists")
-  res.render('index', {title: 'Home',tasks,lists,csrfToken: req.csrfToken()})
+  res.render('index', {title: 'Home',tasks,lists,tags,csrfToken: req.csrfToken()})
 }));
+
+module.exports = router
