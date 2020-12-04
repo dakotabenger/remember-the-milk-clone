@@ -38,7 +38,9 @@ document.addEventListener('DOMContentLoaded', event => {
     const formContainer = document.querySelector(".form-container")
     const showFormButton = document.querySelector(".show-form-button")
         console.log(taskEle,"task ele")
-        showFormButton.addEventListener("click",(e) => {
+        console.log(showFormButton,"SHOWFORMBUTTON")
+        showFormButton.addEventListener("submit",(e) => {
+            console.log("here")
             e.preventDefault()
             formContainer.hidden = !formContainer.hidden
         });
