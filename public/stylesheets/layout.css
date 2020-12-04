@@ -102,7 +102,9 @@ menu-icon {
 }
 
 .nav-links ul li {
-  margin: 0 8px;
+  margin: 0;
+  width: 150px;
+  background-color: black;
 }
 .nav-links {
   position: absolute;
@@ -127,6 +129,7 @@ menu-icon {
 
 .nav-links li a {
   background-color: black;
+  color: white;
 }
 
 .nav-links li a:hover {
@@ -137,5 +140,5 @@ menu-icon {
 li h1 {
   background-color: black;
   color: white;
-  padding-bottom: 0;
+  margin-bottom: 0;
 }
