@@ -12,7 +12,9 @@ document.addEventListener('DOMContentLoaded', event => {
     const signUpButton = document.getElementById("sign-up-button-id");
     const signUpText = document.querySelectorAll(".sign-up-text");
     const userInput = document.querySelectorAll(".user-input");
-    const errorMsg = document.querySelectorAll(".error-msg")
+    const errorMsg = document.querySelectorAll(".error-msg");
+    const hamburgerMenu = document.getElementById("hamburger-menu");
+    const navLinks = document.getElementsByClassName("nav-links")[0];
 
     if (toggleButton) {
         toggleButton.addEventListener('click', () => {
@@ -32,6 +34,7 @@ document.addEventListener('DOMContentLoaded', event => {
         });
     };
 
+<<<<<<< HEAD
     
 
 });
@@ -42,6 +45,17 @@ const taskEle = document.querySelector(".task-view-container")
 const formContainer = document.querySelector(".form-container")
 const showFormButton = document.querySelector(".show-form-button")
 const closeButton = document.createElement("button")
+=======
+    hamburgerMenu.addEventListener('click', event => {
+        navLinks.classList.toggle('open-menu')
+    })
+
+    const form = document.querySelector('.new-task')
+    const nameTableCells = document.querySelectorAll(".task-td")
+    const taskEle = document.querySelector(".task-view-container")
+    const formContainer = document.querySelector(".form-container")
+    const showFormButton = document.querySelector(".show-form-button")
+>>>>>>> 3b672875a63ada03b1372a4804bbcffc73fe0789
         console.log(taskEle,"task ele")
         console.log(showFormButton,"SHOWFORMBUTTON")
         showFormButton.addEventListener("click",(e) => {
