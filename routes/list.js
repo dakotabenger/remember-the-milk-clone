@@ -28,6 +28,7 @@ router.get("/:id",requireAuth,asyncHandler(async (req,res,next) => {
     const data = {list,lists,listTasks,tags}
     if (list) {
         if (list.user_id !== userId) {
+
                 const err = new Error('Unauthorized'); //*tag NOT Found
                 err.status = 401;
                 err.message = 'You are not authorized to view this task';

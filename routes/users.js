@@ -50,7 +50,7 @@ router.post('/sign-up', csrfProtection,userValidators, asyncHandler(async functi
 if (validatorErrors.isEmpty()) {
   const salt = await bcrypt.genSaltSync(10);
   const hashedPassword = await bcrypt.hash(req.body.password,salt)
-  const newUser = await db.User.create({email: req.body.email,hashedPassword:hashedPassword,createdAt: Date.now(),updatedAt: Date.now()})
+  const newUser = await db.User.create({email: req.body.email,hashedPassword:hashedPassword})
   loginUser(req,res,newUser);
   return req.session.save(() => {
     res.redirect("/")
@@ -108,7 +108,7 @@ router.post('/logout', (req,res) => {
   return req.session.save(() => {
     return  res.redirect('/users/login');
   });
- 
+
 
 })
 module.exports = router;
