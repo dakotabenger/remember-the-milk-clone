@@ -5,3 +5,21 @@
 .hidden {
     display: none;
 }
+
+.priority-three {
+    fill: red
+}
+
+.priority-two {
+    fill:darkgoldenrod
+}
+
+.priority-one {
+    fill: green
+}
+
+.task-view-container {
+    float: right;
+    height: 100%;
+    width: 45%;
+}
