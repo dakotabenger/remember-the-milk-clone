@@ -6,8 +6,8 @@ const router = express.Router()
 const { check, validationResult } = require('express-validator');
 
 const renderListPage = (req,res,next,data) => {
-    const {list,lists,listTasks} = data
-    res.render("list",{list,lists,listTasks})
+    const {list,lists,listTasks, tags} = data
+    res.render("list",{list,lists,listTasks,tags})
 }
 
 const listNotFoundError = (id) => {
@@ -24,10 +24,12 @@ router.get("/:id",requireAuth,asyncHandler(async (req,res,next) => {
     const list = await db.List.findByPk(listId)
     const lists = await db.List.findAll({where: {user_id:userId}})
     const listTasks = await db.Task.findAll({where: {list_id:listId}})
-    const data = {list,lists,listTasks} 
+    const tags = await db.Tag.findAll({where: {user_id:userId}})
+    const data = {list,lists,listTasks,tags}
     if (list) {
         if (list.user_id !== userId) {
-                const err = new Error('Unauthorized');
+
+                const err = new Error('Unauthorized'); //*tag NOT Found
                 err.status = 401;
                 err.message = 'You are not authorized to view this task';
                 err.title = 'Unauthorized';
@@ -53,14 +55,14 @@ router.post("/",requireAuth,csrfProtection,asyncHandler(async (req,res) => {
           })
       } else {
         const errors = validatorErrors.array().map((error) => error.msg);
-        const tasks = await db.Task.findAll({ where: {user_id: user}, order:[['start_date', 'ASC']]}); 
+        const tasks = await db.Task.findAll({ where: {user_id: user}, order:[['start_date', 'ASC']]});
         res.render('index', {
           errors,
           lists,
           tasks,
           csrfToken: req.csrfToken(),
         })
-      
+
       }
 }))
 

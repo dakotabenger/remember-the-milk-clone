@@ -9,20 +9,20 @@ html
         link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous")
         link(rel="stylesheet" href="/stylesheets/layout.css")
         script(src="/javascripts/index.js")
-        script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous")
-        script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous")
+        //- script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous")
+        //- script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous")
         script(type='text/javascript').
           function toggleMenuButton(x) {
           x.classList.toggle("change");
           }
   body
     nav.navbar
-      div.menu-icon
+      div(class="menu-icon" id="hamburger")
         svg.bar(style="width:24px;height:24px" viewBox="0 0 24 24")
           path(fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z")
         div.nav-links
           ul
-            li: h1.nav-header Remeber The Milk
+            li: h1.nav-header DFTM.
             li: a.nav-link(href="/") All Tasks
             li: a.nav-link(href="/") Tomorrow
             li: a.nav-link(href="/") This Week
@@ -34,6 +34,11 @@ html
                     li
                       a(href=`/lists/${list.id}`)=list.name
             li: a.nav-link(href="/") Tags
+              if tags
+                ul
+                  each tag in tags
+                    li
+                      a(href=`/lists/${tag.id}`)=tag.name
             li: a.nav-link(href="/users/login") Log Out
       div(class="menu-container" onclick="toggleMenuButton(this)")
         div(class="bar1 bars")
