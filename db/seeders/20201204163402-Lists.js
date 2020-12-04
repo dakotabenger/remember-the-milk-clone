@@ -1,23 +1,26 @@
 'use strict';
-
+const faker = require("faker")
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Lists', [
-      {
-        id: 1,
-        name: 'test1',
-        user_id: 1,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        id: 2,
-        name: 'test2',
-        user_id: 2,
-        createdAt: new Date(),
-        updatedAt: new Date()
+    const seedArray = [];
+    for (let i = 1; i < 26; i++ ) {
+      let userId = 0
+      if (i >= 15) {
+        userId = 1
+      } else {
+        userId++
       }
-    ], {});
+      const seedData = {
+        id: i,
+        name: faker.lorem.word(),
+        user_id: userId,
+        createdAt: new Date(),
+        updatedAt: new Date()
+
+      }
+      seedArray.push(seedData)
+    }
+    return queryInterface.bulkInsert('Lists', seedArray, {});
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.

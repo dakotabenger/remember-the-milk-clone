@@ -2,25 +2,30 @@
 const bcrypt = require('bcryptjs');
 const password = 'password';
 const hash = bcrypt.hashSync(password, 10)
+const faker = require("faker")
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Users', [
-      {
-        id: 1,
-        email: 'test5@gmail.com',
+    const seedArray = []
+    const demoUser = {
+      id: 1,
+        email: "demo@dftm.com",
         hashedPassword: hash,
         createdAt: new Date(),
         updatedAt: new Date()
-  },
-  {
-    id: 2,
-    email: 'test6@gmail.com',
-    hashedPassword: hash,
-    createdAt: new Date(),
-    updatedAt: new Date()
-}],
-  );
+    }
+    seedArray.push(demoUser)
+    for (let i = 2; i < 16; i++) {
+      const seedData = {
+        id: i,
+        email: faker.internet.email(),
+        hashedPassword: hash,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
+      seedArray.push(seedData)
+    }
+    return queryInterface.bulkInsert('Users',seedArray, {});
 
     /*
       Add altering commands here.
