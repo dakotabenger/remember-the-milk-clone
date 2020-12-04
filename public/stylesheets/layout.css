@@ -85,7 +85,8 @@
 
 /* Redo Nav Bar */
 .navbar {
-  background-color: black;
+  position: relative;
+  background-color: #1C2725;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -99,6 +100,9 @@ menu-icon {
 .nav-links ul {
   display: flex;
  flex-direction: column;
+ justify-content: flex-start;
+ height: 100%;
+
 }
 
 .nav-links ul li {
@@ -108,11 +112,15 @@ menu-icon {
 }
 .nav-links {
   position: absolute;
-  top: 0;
+  top: 3;
   left: 0;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s linear;
+  background-color: black;
+  height: 995px;
+  border-right: 3px solid #5DA09E;
+  border-top: 3px solid #5DA09E;
 }
 .navbar {
   position: relative;
@@ -130,6 +138,7 @@ menu-icon {
 .nav-links li a {
   background-color: black;
   color: white;
+  font-size: 18px;
 }
 
 .nav-links li a:hover {
@@ -141,4 +150,96 @@ li h1 {
   background-color: black;
   color: white;
   margin-bottom: 0;
+}
+
+.sub-list {
+  display: none;
+  position: absolute;
+}
+
+
+/* index page  */
+
+.task-view-container {
+  height: 995px !important;
+  background-color: black;
+  border-left: 3px solid #5DA09E;
+  border-top: 3px solid #5DA09E;
+}
+
+.index-page-content.clicked {
+  position: relative;
+  left: 153px;
+}
+
+.table-container {
+  padding: 0;
+  margin: 0;
+  height: 890px;
+}
+
+td {
+  position: relative;
+  list-style: none;
+  padding: 10px 10px;
+  background-color: #18191A;
+  color: white;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.task-label {
+  font-size: 15px;
+  padding-left: 10px;
+}
+
+.index-page-content {
+  background-color: black;
+}
+
+.welcome-back-text {
+  color: white;
+  padding-left: 10px;
+  padding-top: 10px;
+  font-size: 20px;
+}
+
+.tasks-table {
+  width: 100%;
+}
+
+
+p {
+  color: white;
+}
+
+p:hover {
+  color: #5DA09E;
+}
+
+.task-name {
+  background-color: #5DA09E;
+  color: black;
+  padding-left: 10px;
+}
+
+.show-form-button {
+  margin: 10px;
+}
+
+.user-task-input {
+  height: auto;
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  margin-bottom: 32px;
+  margin-left: 6.08px;
+  margin-top: 32px;
+  min-height: 23px;
+  min-width: 126px;
+  text-align: left;
+  white-space: nowrap;
+  width: auto;
+  background-color: black;
+  color: #ffffff;
+  border: none;
+  border-bottom: 2px solid white;
 }

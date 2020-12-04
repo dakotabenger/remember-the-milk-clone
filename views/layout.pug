@@ -20,26 +20,25 @@ html
       div(class="menu-icon" id="hamburger")
         svg.bar(style="width:24px;height:24px" viewBox="0 0 24 24")
           path(fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z")
-        div.nav-links
-          ul
-            li: h1.nav-header DFTM.
-            li: a.nav-link(href="/") All Tasks
-            li: a.nav-link(href="/") Tomorrow
-            li: a.nav-link(href="/") This Week
-
-            li: a.nav-link(href="/") Lists
-              if lists
-                ul
-                  each list in lists
-                    li
-                      a(href=`/lists/${list.id}`)=list.name
-            li: a.nav-link(href="/") Tags
-              if tags
-                ul
-                  each tag in tags
-                    li
-                      a(href=`/lists/${tag.id}`)=tag.name
-            li: a.nav-link(href="/users/login") Log Out
+      div.nav-links
+        ul
+          li: h1.nav-header DFTM.
+          li: a.nav-link(href="/") All Tasks
+          li: a.nav-link(href="/") Tomorrow
+          li: a.nav-link(href="/") This Week
+          li: a.nav-link(href="/") Lists
+            if lists
+              ul.sub-list
+                each list in lists
+                  li
+                    a(href=`/lists/${list.id}`)=list.name
+          li: a.nav-link(href="/") Tags
+            if tags
+              ul.sub-list
+                each tag in tags
+                  li
+                    a(href=`/lists/${tag.id}`)=tag.name
+          li: a.nav-link(href="/users/login") Log Out
       div(class="menu-container" onclick="toggleMenuButton(this)")
         div(class="bar1 bars")
         div(class="bar2 bars")

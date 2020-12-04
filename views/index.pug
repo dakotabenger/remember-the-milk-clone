@@ -6,35 +6,35 @@ append head
   //- add page specific js
 
 block content
-  div(class="task-view-container hidden")
-  h1= title
-  p Welcome to your Project Skeleton
-  div(class="errors-container")
-  button(class="show-form-button" type="submit") Create New Task
-  //- put in modal
-  div(class="form-container" hidden)
-    form(class='new-task')
-      input(class='user-input' id="name" type='text' placeholder='Task Name' name='name')
-      input(class='user-input' type='text' placeholder='Description' name='description')
-      input(class='user-input' type='number' placeholder='Priority' name='priority' )
-      input(class='user-input' type='date' placeholder='Start Date' name='start_date' )
-      input(class='user-input' type='date' placeholder='End Date' name='end_date' )
-      input(class='user-input' type='checkbox' placeholder='Completed' name='completed')
-      button(class='user-input tasksubmitbutton' type='submit' name='submit') Add Task
-  div(class="table-container")
-    table(class='tasks-table')
-      thead
-        tr
-          th Task Name
-
-      tbody(class='TBD')
-        each task in tasks
-          tr(class='TBD2')
-            td(id=task.id class="task-td")
-              input(id="check" type="checkbox" class="completed-checkbox")
-              label(id=task.id)=task.name
-
+  div.index-page-content
     div(class="task-view-container hidden")
+    p.welcome-back-text Welcome Back!
+    div(class="errors-container")
+    button(class="show-form-button" type="submit") Create New Task
+    //- put in modal
+    div(class="form-container" hidden)
+      form(class='new-task')
+        input(class='user-task-input' id="name" type='text' placeholder='Task Name' name='name')
+        input(class='user-task-input' type='text' placeholder='Description' name='description')
+        input(class='user-task-input' type='number' placeholder='Priority' name='priority' )
+        input(class='user-task-input' type='date' placeholder='Start Date' name='start_date' )
+        input(class='user-task-input' type='date' placeholder='End Date' name='end_date' )
+        input(class='user-task-input' type='checkbox' placeholder='Completed' name='completed')
+        button(class='tasksubmitbutton' type='submit' name='submit') Add Task
+    div(class="table-container")
+      table(class='tasks-table')
+        thead
+          tr
+            th.task-name Task Name
+
+        tbody(class='TBD')
+          each task in tasks
+            tr(class='TBD2')
+              td(id=task.id class="task-td")
+                input(id="check" type="checkbox" class="completed-checkbox")
+                label(id=task.id class="task-label")=task.name
+
+      div(class="task-view-container hidden")
 
     //- div
     //-   button(class="theme-toggle-button" id="toggle-button") Swap Themes
@@ -49,4 +49,3 @@ block content
   //- 3)add/delete list (select/option?)
   //- 2)change prority from number to color on the front end
   //- 5)counter (as a bonus)
-

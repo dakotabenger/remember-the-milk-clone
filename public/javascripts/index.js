@@ -2,7 +2,7 @@
     document.addEventListener('DOMContentLoaded', event => {
         const navLinks = document.querySelector(".nav-links")
         const hamburgerMenu = document.querySelector(".menu-icon")
-        console.log(hamburgerMenu)
+        const indexContent = document.getElementsByClassName('index-page-content')[0]
 
 
     const toggleButton = document.getElementById('toggle-button');
@@ -34,6 +34,8 @@
 
     hamburgerMenu.addEventListener('click', event => {
         navLinks.classList.toggle('open-menu')
+        indexContent.classList.toggle('clicked')
+
     });
 
     const form = document.querySelector('.new-task')
