@@ -1,0 +1,14 @@
+extends layout.pug
+
+block content
+    h1= Lists
+    p Add to List
+    div(class="search-container")
+    button(class="show-form-button" type="submit")
+
+    div(class="search-container" hidden)
+
+        form(class='search-task')
+            input(class='user-input' id="name" type='text' placeholder='Task Name' name='name')
+
+script(src="/javascripts/index.js" type="module" defer)
