@@ -132,7 +132,7 @@ menu-icon {
 }
 
 .bar {
-  color: white;
+  color: white !important;
 }
 
 .nav-links li a {
@@ -242,4 +242,8 @@ p:hover {
   color: #ffffff;
   border: none;
   border-bottom: 2px solid white;
+}
+
+.body-index {
+  background-color: black;
 }
