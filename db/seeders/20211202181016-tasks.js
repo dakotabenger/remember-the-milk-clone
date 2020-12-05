@@ -3,6 +3,13 @@ const faker = require("faker")
 module.exports = {
   up: (queryInterface, Sequelize) => {
     const seedArray = [];
+    let boolean;
+
+    if (i % 3 === 0) {
+      boolean = true
+    } else {
+      boolean = false
+    }
     let tagId = 0;
     let listId = 0;
     for (let i= 1; i <26;i++){
@@ -23,7 +30,7 @@ module.exports = {
         tag_id: tagId,
         user_id: 1,
         list_id: listId,
-        completed: true,
+        completed: boolean,
         createdAt: new Date(),
         updatedAt: new Date()
         }
@@ -33,7 +40,13 @@ module.exports = {
     let userId = 0;
     let listId2 = 0;
     for (let i = 26; i < 276; i++) {
-      
+      let boolean;
+
+      if (i % 3 === 0) {
+        boolean = true
+      } else {
+        boolean = false
+      }
       if (i % 25 === 0) {
         tagId2 = 1
         listId2 = 1
@@ -61,7 +74,7 @@ module.exports = {
         tag_id: tagId2,
         user_id: userId,
         list_id: listId2,
-        completed: true,
+        completed: boolean,
         createdAt: new Date(),
         updatedAt: new Date()
       }
