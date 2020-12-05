@@ -132,7 +132,7 @@ menu-icon {
 }
 
 .bar {
-  color: white;
+  color: white !important;
 }
 
 .nav-links li a {
