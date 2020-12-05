@@ -175,7 +175,4 @@
             table.appendChild(newTr)
      }});
 
-   });
-
-   
-
+  
