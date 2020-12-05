@@ -175,7 +175,7 @@
             newTr.appendChild(newTd)
             table.appendChild(newTr)
      }
-   });
+
 
    
 
