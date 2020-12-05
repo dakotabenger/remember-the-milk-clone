@@ -5,14 +5,14 @@ module.exports = {
     const seedArray = [];
     let boolean;
 
-    if (i % 3 === 0) {
-      boolean = true
-    } else {
-      boolean = false
-    }
     let tagId = 0;
     let listId = 0;
     for (let i= 1; i <26;i++){
+          if (i % 3 === 0) {
+            boolean = true
+          } else {
+            boolean = false
+          }
       if (i % 25 === 0) {
         tagId = 1
         listId = 1
@@ -40,7 +40,6 @@ module.exports = {
     let userId = 0;
     let listId2 = 0;
     for (let i = 26; i < 276; i++) {
-      let boolean;
 
       if (i % 3 === 0) {
         boolean = true
