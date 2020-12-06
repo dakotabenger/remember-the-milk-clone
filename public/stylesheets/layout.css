@@ -132,6 +132,7 @@ menu-icon {
 }
 
 .bar {
+  transition-timing-function: ease-in;
   color: white !important;
 }
 

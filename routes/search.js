@@ -21,7 +21,7 @@ router.get('/', requireAuth,csrfProtection, asyncHandler(async (req, res) => {
     },
     order: [["start_date", "ASC"]],
   }); 
-      console.log("11111111111111111111111111111111111111111111111111:      ",req.query.search)
+      // console.log("11111111111111111111111111111111111111111111111111:      ",req.query.search)
   const lists = await db.List.findAll({where:{user_id:user}})
   res.render('index', {title: 'Home',tasks,lists,tags,csrfToken: req.csrfToken()})
 }));

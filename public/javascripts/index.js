@@ -32,11 +32,12 @@
         });
     };
 
-    hamburgerMenu.addEventListener('click', event => {
-        navLinks.classList.toggle('open-menu')
-        indexContent.classList.toggle('clicked')
-
-    });
+    if (hamburgerMenu) {
+      hamburgerMenu.addEventListener("click", (event) => {
+        navLinks.classList.toggle("open-menu");
+        indexContent.classList.toggle("clicked");
+      });
+    }
 
     const form = document.querySelector('.new-task')
     const nameTableCells = document.querySelectorAll(".task-td")
@@ -44,16 +45,18 @@
     const formContainer = document.querySelector(".form-container")
     const showFormButton = document.querySelector(".show-form-button")
     const closeButton = document.createElement("button")
-            console.log(taskEle,"task ele")
-            console.log(showFormButton,"SHOWFORMBUTTON")
-            showFormButton.addEventListener("click",(e) => {
-                e.stopPropagation()
-                console.log("hereGUYS")
-                e.preventDefault()
-                console.log("formContainer Before",formContainer)
-                formContainer.hidden = !formContainer.hidden
-                console.log("formContainer after", formContainer)
-            });
+            // console.log(taskEle,"task ele")
+            // console.log(showFormButton,"SHOWFORMBUTTON")
+            if(showFormButton){
+                showFormButton.addEventListener("click",(e) => {
+                    e.stopPropagation()
+                    // console.log("hereGUYS")
+                    e.preventDefault()
+                    // console.log("formContainer Before",formContainer)
+                    formContainer.hidden = !formContainer.hidden
+                    // console.log("formContainer after", formContainer)
+                });
+            }
             // error start
             nameTableCells.forEach((cell) => {
                 cell.addEventListener("click",async (e) => {
@@ -79,7 +82,7 @@
                     descriptionPtag.innerHTML = "Description: N/A"
                 }
                 const completedTag = document.createElement("div")
-                console.log(completed, "COMPLETED")
+                // console.log(completed, "COMPLETED")
                 if (completed === false || completed === null) {
                     //Bootsrap Icon https://icons.getbootstrap.com/icons/square/
                     completedTag.innerHTML = `<p>Completed: <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -138,32 +141,34 @@
                             taskEle.classList.toggle("hidden")
                         })
 
+        if (form){
 
             form.addEventListener('submit',async (e) => {
-                 e.preventDefault();
-                 const formData = new FormData(form);
-                 const name = formData.get("name")
-                 const description = formData.get('description')
-                 const priority = formData.get('priority')
-                 const startDate = formData.get('start_date')
-                 const endDate = formData.get("end_date");
-                 const completed = formData.get("completed")
-
-
+                e.preventDefault();
+                const formData = new FormData(form);
+                const name = formData.get("name")
+                const description = formData.get('description')
+                const priority = formData.get('priority')
+                const startDate = formData.get('start_date')
+                const endDate = formData.get("end_date");
+                const completed = formData.get("completed")
+                
+                
                 const reqBody = {  name, description, priority, startDate, endDate, completed }
-
-                 const res = await fetch('/api/tasks', {
-                     credentials:"same-origin",
-                     method:'POST',
-                     headers: {"Content-Type": "application/json"},
-                     body: JSON.stringify(reqBody)
-                 })
-                 const json = await res.json()
-                 form.reset()
-                 const showTasks = receiveTaskFromServer(json)
-
-                 });
-    
+                
+                const res = await fetch('/api/tasks', {
+                    credentials:"same-origin",
+                    method:'POST',
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(reqBody)
+                })
+                const json = await res.json()
+                form.reset()
+                const showTasks = receiveTaskFromServer(json)
+                
+            });
+        }
+            
                  
                 });
      const receiveTaskFromServer = (data) => {

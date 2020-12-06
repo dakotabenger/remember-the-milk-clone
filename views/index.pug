@@ -32,7 +32,7 @@ block content
             each task in tasks
               tr(class='TBD2')
                 td(id=task.id class="task-td")
-                  input(id="check" type="checkbox" class="completed-checkbox")
+                  input(id=task.id type="checkbox" class="completed-checkbox" value=false)
                   label(id=task.id class="task-label")=task.name
 
         div(class="task-view-container hidden")

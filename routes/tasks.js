@@ -164,13 +164,13 @@ router.patch("/:id/list/",requireAuth,asyncHandler(async (req,res,next) => {
 // Get single Task
 
 router.get("/:id",requireAuth,asyncHandler(async (req,res) => {
-        console.log("HERE ONE")
+        // console.log("HERE                     ONE")
         const taskId = req.params.id
         const task = await db.Task.findByPk(taskId)
-        console.log("taskId",taskId)
-        console.log("task",task)
+        // console.log("taskId",taskId)
+        // console.log("task",task)
         if (task) {
-                console.log("HERE TWO")
+                // console.log("HERE                           TWO")
                 if (task.user_id !== req.session.auth.userId) {
                         const err = new Error('Unauthorized');
                         err.status = 401;
@@ -178,9 +178,9 @@ router.get("/:id",requireAuth,asyncHandler(async (req,res) => {
                         err.title = 'Unauthorized';
                         throw err;
                 }
-                console.log("RES",res)
+                // console.log("RES                                 ",res)
                 const resJSON = res.json({task})
-                console.log("ResJSON",resJSON)
+                // console.log("ResJSON                              ",resJSON)
         } else {
                 next(taskNotFoundError(taskId))
         }
