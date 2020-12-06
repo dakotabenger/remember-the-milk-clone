@@ -85,7 +85,7 @@ router.post(
 
 
 // Edit Single task route
-router.post("/:id/edit",requireAuth,asyncHandler(async (req,res,next) => {
+router.put("/:id/",requireAuth,asyncHandler(async (req,res,next) => {
         const taskId = req.params.id
         const task = await db.Task.findByPk(taskId)
         if (task) {
@@ -147,7 +147,7 @@ router.post("/:id/list/:listId",requireAuth,asyncHandler(async (req,res,next) =>
 
 // Delete Task from list
 
-router.post("/:id/list/delete",requireAuth,asyncHandler(async (req,res,next) => {
+router.delete("/:id/list/",requireAuth,asyncHandler(async (req,res,next) => {
         const taskId = req.params.id
         const task = await db.Task.findByPk(taskId)
         if (task) {
@@ -210,7 +210,7 @@ router.post("/:id/tag/:tagId",requireAuth,asyncHandler(async (req,res,next) => {
         }
 }))
 
-router.post("/:id/tag/delete",requireAuth,asyncHandler(async (req,res,next) => {
+router.delete("/:id/tag/",requireAuth,asyncHandler(async (req,res,next) => {
         const taskId = req.params.id
         const task = await db.Task.findByPk(taskId)
         if (task) {

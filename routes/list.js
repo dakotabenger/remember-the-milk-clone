@@ -70,7 +70,7 @@ router.post("/",requireAuth,csrfProtection,asyncHandler(async (req,res) => {
       }
 }))
 
-router.delete("/:id",requireAuth,asyncHandler(async (req,res) => {
+router.post("/:id/delete",requireAuth,asyncHandler(async (req,res,next) => {
     const list = await db.List.findOne({
         where: {
                 id: req.params.id,
@@ -95,7 +95,7 @@ if (list) {
 }
 }))
 
-router.patch("/:id",requireAuth,csrfProtection,asyncHandler(async (req,res) => {
+router.post("/:id/edit",requireAuth,csrfProtection,asyncHandler(async (req,res,next) => {
     const listId = req.params.id
     const {name} = req.body.name
     const list = await db.List.findByPk(listId)
@@ -103,7 +103,7 @@ router.patch("/:id",requireAuth,csrfProtection,asyncHandler(async (req,res) => {
         if (req.session.auth.userId !== list.user_id) {
                 const err = new Error('Unauthorized');
                 err.status = 401;
-                err.message = 'You are not authorized to delete this task.';
+                err.message = 'You are not authorized to edit this task.';
                 err.title = 'Unauthorized';
                 throw err;
         }

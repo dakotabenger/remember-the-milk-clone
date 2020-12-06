@@ -14,12 +14,18 @@ nav.navbar
                         each list in lists
                             li
                                 a(href=`/lists/${list.id}`)=list.name
+                                form(class='delete-list-form' method='post' action=`/lists/${list.id}/delete`)
+                                    input(type='hidden' name='_csrf' value=csrfToken)
+                                    button(class='user-input tasksubmitbutton delete-list-submit' type='submit' name='submit') Delete List
             li: a.nav-link(href="/") Tags
                 if tags
                     ul.sub-list
                         each tag in tags
                             li
-                                a(href=`/lists/${tag.id}`)=tag.name
+                                a(href=`/tags/${tag.id}`)=tag.name
+                                     form(class='delete-tag-form' method='post' action=`/tags/${tag.id}/delete`)
+                                        input(type='hidden' name='_csrf' value=csrfToken)
+                                        button(class='user-input tasksubmitbutton' type='submit' name='submit') Delete List
             li: a.nav-link(href="/users/login") Log Out
     div(class="menu-container" onclick="toggleMenuButton(this)")
         div(class="bar1 bars")

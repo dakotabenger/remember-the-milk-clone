@@ -13,22 +13,48 @@ block content
       div(class="errors-container")
       button(class="show-form-button" type="submit") Create New Task
       //- put in modal
-      button(class="add-tag-button" type="submit") Add to Tag
+      button(class="add-tag-button" type="submit" hidden) Add to Tag
       div(class="tag-form-div" hidden)
         form(class='add-tag')
           select(name="add-tags" class="user-task-input")
             if tags
               each tag in tags
                 option(value=tag.id)=tag.name
-          button(type="submit" class="tag-submit")
-      button(class="add-list-button" type="submit") Add to List
+          button(type="submit" class="tag-submit") Tag
+      button(class="add-list-button" type="submit" hidden) Add to List
       div(class="list-form-div" hidden)
         form(class='add-list')
           select(name="add-list" class="user-task-input")
             if lists
               each list in lists
                 option(value=list.id)=list.name
-          button(type="submit" class="list-submit")
+          button(type="submit" class="list-submit") List
+      button(class="edit-task-button" type="submit" hidden) Edit Task
+      div(class="edit-form-div" hidden)
+        form(class='edit-task')
+          input(class='user-task-input' type='text' placeholder='Task Name' name='name')
+          input(class='user-task-input' type='text' placeholder='Description' name='description')
+          input(class='user-task-input' type='number' placeholder='Priority' name='priority' )
+          input(class='user-task-input' type='date' placeholder='Start Date' name='start_date' )
+          input(class='user-task-input' type='date' placeholder='End Date' name='end_date' )
+          label(for="completed") Completed
+          input(class='user-task-input' type='checkbox' placeholder='Completed' name='completed')
+          button(class='tasksubmitbutton' type='submit' name='submit') Edit Task
+      button(class="create-list-button" type="submit") Create List 
+      div.new-list-div(hidden)
+        form(class='new-list' method='post' action='/lists')
+          input(type='hidden' name='_csrf' value=csrfToken)
+          input(class='user-input' type='text' placeholder='List Name' name='name')
+          button(class='user-input tasksubmitbutton create-list-submit' type='submit' name='submit') Create List
+      button(class="create-tag-button" type="submit") Create Tag
+      div.new-tag-div(hidden)
+        form(class='new-tag-form' method='post' action='/tags')
+            input(type='hidden' name='_csrf' value=csrfToken)
+            input(class='user-input' id="name" type='text' placeholder='Tag Name' name='name')
+            input(class='user-input' type='text' placeholder='Description' name='description')
+            button(class='user-input tasksubmitbutton' type='submit' name='submit') Create Tag
+
+
       div(class="form-container" hidden)
         form(class='new-task')
           input(class='user-task-input' id="name" type='text' placeholder='Task Name' name='name')
@@ -58,11 +84,12 @@ block content
               tr(class='TBD2')
                 td(id=task.id class="task-td")
                     if task.completed
-                      input(id=task.id type="checkbox" class=`completed-checkbox-${task.id}` checked)
-                      label(id=task.id class="task-label")=task.name
+                      div
+                      input(id=task.id type="checkbox" class=`completed-checkbox-${task.id} completed-checkbox` checked)
+                      label(id=task.id class=`task-label id-${task.id}`)=task.name
                     else
-                      input(id=task.id type="checkbox" class=`completed-checkbox-${task.id}`)
-                      label(id=task.id class="task-label")=task.name
+                      input(id=task.id type="checkbox" class=`completed-checkbox-${task.id} completed-checkbox`)
+                      label(id=task.id class=`task-label id-${task.id}`)=task.name
                   
 
 
