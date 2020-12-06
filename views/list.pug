@@ -11,24 +11,24 @@ block content
       div(class="task-view-container" hidden)
       p.welcome-back-text Welcome Back!
       div(class="errors-container")
-      button(class="show-form-button" type="submit") Create New Task
+      button(class="show-form-button index-button" type="submit") Create New Task
       //- put in modal
-      button(class="add-tag-button" type="submit") Add to Tag
+      button(class="add-tag-button index-button" type="submit") Add to Tag
       div(class="tag-form-div" hidden)
         form(class='add-tag')
           select(name="add-tags" class="user-task-input")
             if tags
               each tag in tags
                 option(value=tag.id)=tag.name
-          button(type="submit" class="tag-submit")
-      button(class="add-list-button" type="submit") Add to List
+          button(type="submit index-button" class="tag-submit")
+      button(class="add-list-button index-button" type="submit") Add to List
       div(class="list-form-div" hidden)
         form(class='add-list')
           select(name="add-list" class="user-task-input")
             if lists
               each list in lists
                 option(value=list.id)=list.name
-          button(type="submit" class="list-submit")
+          button(type="submit index-button" class="list-submit")
       div(class="form-container" hidden)
         form(class='new-task')
           input(class='user-task-input' id="name" type='text' placeholder='Task Name' name='name')
@@ -46,7 +46,7 @@ block content
           select(name="tags" class="user-task-input")
             each tag in tags
               option(value.tag.id)=tag.name
-          button(class='tasksubmitbutton' type='submit' name='submit') Add Task
+          button(class='tasksubmitbutton index-button' type='submit' name='submit') Add Task
       div(class="table-container")
         table(class='tasks-table')
           thead
@@ -63,7 +63,7 @@ block content
                     else
                       input(id=task.id type="checkbox" class=`completed-checkbox-${task.id}`)
                       label(id=task.id class="task-label")=task.name
-                  
+
 
 
     //- div

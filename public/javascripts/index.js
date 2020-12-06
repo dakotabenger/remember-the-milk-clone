@@ -98,7 +98,7 @@ if (tagButton) {
           editButton.hidden = false;
           if (!taskEle.hidden) {
             taskEle.textContent = "";
-          } 
+          }
         // else if (taskEle.hidden) {
         //     taskEle.hidden = !taskEle.hidden;
         //   }
@@ -112,9 +112,9 @@ if (tagButton) {
             priority,
             id,
           } = data.task;
-         
+
         //   console.log("11111111111111111111111111111111111111111 startdate:     ",moment(start_date).format("MM Do YYYY"))
-          
+
 
           const namePtag = document.createElement("p");
           const descriptionPtag = document.createElement("p");
