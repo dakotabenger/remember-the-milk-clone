@@ -19,7 +19,7 @@ block content
             button(class='user-input tasksubmitbutton' type='submit' name='submit') Add Task
 
     div(class="description")
-        form(class='new-task')
+        form(class='new-task' method='post' action='/tasks')
             input(class='user-input' id="name" type='text' placeholder='Task Name' name='name')
             input(class='user-input' type='text' placeholder='Description' name='description')
             input(class='user-input' type='number' placeholder='Priority' name='priority' )
@@ -29,7 +29,8 @@ block content
             input(class='user-input' value=`${list.id}` hidden)
             button(class='user-input tasksubmitbutton' type='submit' name='submit') Add Task To List
 
-     form(class='description')
+     form(class='description' method='post' action=`/tasks/${task.id}`)
+            input(type=hidden name='_method' value='patch')
             input(class='user-input' id="name" type='text' placeholder='Task Name' name='name')
             input(class='user-input' type='text' placeholder='Description' name='description')
             input(class='user-input' type='number' placeholder='Priority' name='priority' )

@@ -8,7 +8,7 @@ block content
 
     div(class="form-container" hidden)
 
-        form(class='new-task')
+        form(class='new-task' )
             input(class='user-input' id="name" type='text' placeholder='Task Name' name='name')
             input(class='user-input' type='text' placeholder='Description' name='description')
             input(class='user-input' type='number' placeholder='Priority' name='priority' )
@@ -19,16 +19,12 @@ block content
             button(class='user-input tasksubmitbutton' type='submit' name='submit') Add Task
 
     div(class="description")
-        form(class='new-task')
-            input(class='user-input' id="name" type='text' placeholder='Task Name' name='name')
+        form(class='new-task' method='post' action='/tags')
+            input(class='user-input' id="name" type='text' placeholder='Tag Name' name='name')
             input(class='user-input' type='text' placeholder='Description' name='description')
-            input(class='user-input' type='number' placeholder='Priority' name='priority' )
-            input(class='user-input' type='date' placeholder='Start Date' name='start_date' )
-            input(class='user-input' type='date' placeholder='End Date' name='end_date' )
-            input(class='user-input' type='checkbox' placeholder='Completed' name='completed')
-            input(class='user-input' value=`${list.id}` hidden)
+            input(class='user-input' value=`${user.id}` hidden)
             button(class='user-input tasksubmitbutton' type='submit' name='submit') Add Tag To List
-            
+
     div(class="lists")
        div(class="table-container")
             table(class='tasks-table')
