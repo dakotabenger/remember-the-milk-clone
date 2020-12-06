@@ -21,7 +21,6 @@ module.exports = {
         listId++
       }
       const demoUserData = {
-        id: i,
         description: faker.lorem.sentence(),
         name: faker.lorem.word(),
         priority: Math.floor(Math.random() * 3.9),
@@ -64,7 +63,6 @@ module.exports = {
 
       
       const seedData = {
-        id: i,
         description: faker.lorem.sentence(),
         name: faker.lorem.word(),
         priority: Math.floor(Math.random() * 3.9),
