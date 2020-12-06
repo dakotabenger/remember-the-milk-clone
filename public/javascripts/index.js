@@ -34,7 +34,24 @@ document.addEventListener("DOMContentLoaded", (event) => {
       indexContent.classList.toggle("clicked");
     });
   }
-
+  const subList = document.querySelector(".sub-list");
+  const listsButton = document.getElementById("nav-link-lists");
+  if (listsButton) {
+    listsButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      subList.hidden = !subList.hidden;
+    });
+  }
+const tagButton = document.getElementById("nav-link-tags");
+const subTag = document.querySelector(".sub-tag");
+if (tagButton) {
+  tagButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    subTag.hidden = !subTag.hidden;
+  });
+}
   const form = document.querySelector(".new-task");
 
   const taskEle = document.querySelector(".task-view-container");
