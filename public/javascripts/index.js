@@ -14,6 +14,7 @@
     const userInput = document.querySelectorAll(".user-input");
     const errorMsg = document.querySelectorAll(".error-msg")
 
+
     if (toggleButton) {
         toggleButton.addEventListener('click', () => {
             toggleButton.classList.toggle('light');
@@ -73,6 +74,7 @@
                 })
                 const res = await resJSON.json();
                 const {name,description,completed,start_date,end_date,priority,id} = res.task
+
                 const namePtag = document.createElement("p")
                 const descriptionPtag = document.createElement("p")
                 namePtag.innerHTML = `Task Name: ${name}`
