@@ -4,6 +4,7 @@ const { asyncHandler, csrfProtection } = require("../ultils")
 const db = require('../db/models/index')
 const router = express.Router()
 const { check, validationResult } = require('express-validator');
+const moment = require('moment')
 
 const renderListPage = (req,res,next,data) => {
     const {list,lists,listTasks, tags} = data
@@ -27,7 +28,7 @@ router.get("/:id",requireAuth,asyncHandler(async (req,res,next) => {
     const listTasks = await db.Task.findAll({where: {list_id:listId}})
     const tags = await db.Tag.findAll({where: {user_id:userId}})
     const data = {list,lists,listTasks,tags}
-    console.log(list)
+//     console.log(list)
     if (list) {
         if (list.user_id !== userId) {
 

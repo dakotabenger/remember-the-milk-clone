@@ -25,9 +25,9 @@ const taskValidators = [
 router.post("/", requireAuth, taskValidators, asyncHandler(async (req, res) => {
         const validatorErrors = validationResult(req);
         const userId = req.session.auth.userId
-        console.log(userId)
+        // console.log(userId)
         const { name } = req.body
-        console.log(req.body)
+        // console.log(req.body)
         if (validatorErrors.isEmpty()) {
                 const newTask = await db.Task.build({ name: name, user_id: userId })
                 if (req.body.description) {
@@ -48,7 +48,7 @@ router.post("/", requireAuth, taskValidators, asyncHandler(async (req, res) => {
                 if (req.body.priority) {
                         newTask.priority = req.body.priority
                 }
-                console.log(newTask)
+                // console.log(newTask)
                 await newTask.save()
                 res.json({ newTask, message:"Task has been created!" })
 
@@ -119,6 +119,7 @@ router.post("/:id/edit",requireAuth,asyncHandler(async (req,res,next) => {
                 }
                 await task.save()
                 res.json({ task,message:"This task has been edited!" })
+                // console.log(task.completed)
         } else {
                 next(taskNotFoundError(taskId))
         }

@@ -83,9 +83,9 @@ router.post("/login",csrfProtection,loginValidators,asyncHandler(async (req,res)
 
   if (user !== null) {
     const passwordCheck = await bcrypt.compare(password,user.hashedPassword.toString());
-    console.log('user exists');
+    // console.log('user exists');
     if (passwordCheck) {
-      console.log('valid password');
+      // console.log('valid password');
       loginUser(req,res,user)
      return req.session.save((err) => {
         return res.redirect('/');
