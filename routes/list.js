@@ -19,6 +19,7 @@ const listNotFoundError = (id) => {
   };
 
 router.get("/:id",requireAuth,asyncHandler(async (req,res,next) => {
+        // console.log("11111111111111111111111111111111111111111111")
     const userId = req.session.auth.userId
     const listId = req.params.id
     const list = await db.List.findByPk(listId)
@@ -26,6 +27,7 @@ router.get("/:id",requireAuth,asyncHandler(async (req,res,next) => {
     const listTasks = await db.Task.findAll({where: {list_id:listId}})
     const tags = await db.Tag.findAll({where: {user_id:userId}})
     const data = {list,lists,listTasks,tags}
+    console.log(list)
     if (list) {
         if (list.user_id !== userId) {
 
@@ -35,6 +37,7 @@ router.get("/:id",requireAuth,asyncHandler(async (req,res,next) => {
                 err.title = 'Unauthorized';
                 throw err;
         }
+        // console.log("22222222222222222222222222222222",list.user_id)
         renderListPage(req,res,next,data)
 } else {
         next(listNotFoundError(listId))
@@ -44,7 +47,7 @@ router.get("/:id",requireAuth,asyncHandler(async (req,res,next) => {
 router.post("/",requireAuth,csrfProtection,asyncHandler(async (req,res) => {
     const validatorErrors = validationResult(req);
     const user = req.session.auth.userId
-    const lists = await db.List.findAll({where:{user_id:user}})
+    const lists = await db.List.findAll({where:{user_id:user} })
     const {name} = req.body
     if (validatorErrors.isEmpty()) {
         const list = await db.List.create({name,user_id:user})
