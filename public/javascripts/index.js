@@ -37,6 +37,35 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
+    const subList = document.querySelector('.sub-list');
+    const listsButton = document.getElementById('nav-link-lists')
+    if (listsButton) {
+        listsButton.addEventListener("click", event => {
+            event.preventDefault();
+            event.stopPropagation();
+            subList.hidden = !subList.hidden;
+        })
+    }
+
+    const tagButton = document.getElementById('nav-link-tags');
+    const subTag = document.querySelector('.sub-tag');
+    if (tagButton) {
+        tagButton.addEventListener("click", event => {
+            event.preventDefault();
+            event.stopPropagation();
+            subTag.hidden = !subTag.hidden;
+        })
+    }
+
+    // const listsButton = document.getElementsById("nav-link-lists");
+    // const subLists = document.getElementsByClassName('sub-list')[0];
+
+    // if(listsButton) {
+    //     listsButton.addEventListener("click", () => {
+    //         subLists.classList.toggle("open-menu");
+    //     })
+    // }
+
     const form = document.querySelector(".new-task");
     const nameTableCells = document.querySelectorAll(".task-td");
     const taskEle = document.querySelector(".task-view-container");
