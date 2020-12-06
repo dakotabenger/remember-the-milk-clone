@@ -3,9 +3,16 @@ const faker = require("faker")
 module.exports = {
   up: (queryInterface, Sequelize) => {
     const seedArray = [];
+    let boolean;
+
+    let tagId = 0;
+    let listId = 0;
     for (let i= 1; i <26;i++){
-      let tagId = 0;
-      let listId = 0;
+          if (i % 3 === 0) {
+            boolean = true
+          } else {
+            boolean = false
+          }
       if (i % 25 === 0) {
         tagId = 1
         listId = 1
@@ -23,22 +30,28 @@ module.exports = {
         tag_id: tagId,
         user_id: 1,
         list_id: listId,
-        completed: true,
+        completed: boolean,
         createdAt: new Date(),
         updatedAt: new Date()
         }
         seedArray.push(demoUserData)
     }
+    let tagId2 = 0
+    let userId = 0;
+    let listId2 = 0;
     for (let i = 26; i < 276; i++) {
-      let tagId = 0;
-      let userId = 0;
-      let listId = 0;
-      if (i % 25 === 0) {
-        tagId = 1
-        listId = 1
+
+      if (i % 3 === 0) {
+        boolean = true
       } else {
-        tagId++
-        listId++
+        boolean = false
+      }
+      if (i % 25 === 0) {
+        tagId2 = 1
+        listId2 = 1
+      } else {
+        tagId2++
+        listId2++
       }
 
       if (i % 15 === 0 || (i >= 270 && i <= 275)) {
@@ -57,10 +70,10 @@ module.exports = {
         priority: Math.floor(Math.random() * 3.9),
         start_date: new Date(),
         end_date: faker.date.soon(),
-        tag_id: tagId,
-        user_id: 1,
-        list_id: listId,
-        completed: true,
+        tag_id: tagId2,
+        user_id: userId,
+        list_id: listId2,
+        completed: boolean,
         createdAt: new Date(),
         updatedAt: new Date()
       }
