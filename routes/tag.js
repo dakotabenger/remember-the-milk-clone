@@ -69,7 +69,7 @@ router.post("/",requireAuth,csrfProtection,asyncHandler(async (req,res) => {
 
       }
 }))
-router.delete("/:id",requireAuth,asyncHandler(async (req,res) => {
+router.post("/:id/delete",requireAuth,asyncHandler(async (req,res) => {
     const tag = await db.Tag.findOne({
         where: {
                 id: req.params.id,
@@ -91,7 +91,7 @@ const tasks = await db.Task.findAll({where: {tag_id:req.params.id}})
     res.redirect('/');
 }))
 
-router.patch('/:id', requireAuth, asyncHandler(async(req,res) => {
+router.post('/:id/edit', requireAuth, asyncHandler(async(req,res) => {
     const tagid = req.params.id
     const userid = req.session.auth.userId
     const lists =  await db.List.findAll({where:{user_id: userid}})
@@ -116,3 +116,5 @@ router.patch('/:id', requireAuth, asyncHandler(async(req,res) => {
         res.render('tag', {tag,tasks, lists, tags})
     }
 } ) );
+
+module.exports = router
