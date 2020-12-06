@@ -1,8 +1,8 @@
 
-    document.addEventListener('DOMContentLoaded', event => {
-        const navLinks = document.querySelector(".nav-links")
-        const hamburgerMenu = document.querySelector(".menu-icon")
-        const indexContent = document.getElementsByClassName('index-page-content')[0]
+document.addEventListener('DOMContentLoaded', event => {
+    const navLinks = document.querySelector(".nav-links")
+    const hamburgerMenu = document.querySelector(".menu-icon")
+    const indexContent = document.getElementsByClassName('index-page-content')[0]
 
 
 
@@ -38,7 +38,7 @@
             navLinks.classList.toggle('open-menu')
             indexContent.classList.toggle('clicked')
         })
-    
+
 
 
 
@@ -49,17 +49,17 @@
         const showFormButton = document.querySelector(".show-form-button")
         const closeButton = document.createElement("button")
 
-        showFormButton.addEventListener("click",(e) => {
+        showFormButton.addEventListener("click", (e) => {
             e.stopPropagation()
             console.log("hereGUYS")
             e.preventDefault()
-            console.log("formContainer Before",formContainer)
+            console.log("formContainer Before", formContainer)
             formContainer.hidden = !formContainer.hidden
             console.log("formContainer after", formContainer)
         });
         // error start
         nameTableCells.forEach((cell) => {
-            cell.addEventListener("click",async (e) => {
+            cell.addEventListener("click", async (e) => {
                 e.stopPropagation()
                 if (!taskEle.classList.contains("hidden")) {
                     taskEle.textContent = ""
@@ -69,10 +69,10 @@
                 }
                 const targetId = e.target.id
                 const resJSON = await fetch(`/api/tasks/${targetId}`, {
-                    credentials:"same-origin"
+                    credentials: "same-origin"
                 })
                 const res = await resJSON.json();
-                const {name,description,completed,start_date,end_date,priority,id} = res.task
+                const { name, description, completed, start_date, end_date, priority, id } = res.task
                 const namePtag = document.createElement("p")
                 const descriptionPtag = document.createElement("p")
                 namePtag.innerHTML = `Task Name: ${name}`
@@ -123,7 +123,7 @@
                         </svg></p>`
                     }
                 }
-                closeButton.setAttribute("type","submit")
+                closeButton.setAttribute("type", "submit")
                 closeButton.innerHTML = "Close"
                 taskEle.appendChild(namePtag)
                 taskEle.appendChild(descriptionPtag)
@@ -142,7 +142,7 @@
         })
 
 
-        form.addEventListener('submit',async (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(form);
             const name = formData.get("name")
@@ -153,12 +153,12 @@
             const completed = formData.get("completed")
 
 
-            const reqBody = {  name, description, priority, startDate, endDate, completed }
+            const reqBody = { name, description, priority, startDate, endDate, completed }
 
             const res = await fetch('/api/tasks', {
-                credentials:"same-origin",
-                method:'POST',
-                headers: {"Content-Type": "application/json"},
+                credentials: "same-origin",
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(reqBody)
             })
             const json = await res.json()
@@ -170,15 +170,15 @@
 
     }
 
-    });
+});
 
 
-    const receiveTaskFromServer = (data) => {
-        const table = document.querySelector(".tasks-table")
-        const newTr = document.createElement("tr")
-        const newTd = document.createElement("td")
-        newTd.setAttribute("id",`${data.newTask.id}`)
-        newTd.innerHTML = `${data.newTask.name}`
-        newTr.appendChild(newTd)
-        table.appendChild(newTr)
-                 };
+const receiveTaskFromServer = (data) => {
+    const table = document.querySelector(".tasks-table")
+    const newTr = document.createElement("tr")
+    const newTd = document.createElement("td")
+    newTd.setAttribute("id", `${data.newTask.id}`)
+    newTd.innerHTML = `${data.newTask.name}`
+    newTr.appendChild(newTd)
+    table.appendChild(newTr)
+};
