@@ -59,7 +59,7 @@ router.post("/",requireAuth,csrfProtection,asyncHandler(async (req,res) => {
           })
       } else {
         const errors = validatorErrors.array().map((error) => error.msg);
-        const tasks = await db.Task.findAll({ where: {user_id: user}, order:[['start_date', 'ASC']]});
+        const tasks = await db.Task.findAll({ where: {user_id: user}, order:[['id', 'ASC']]});
         res.render('index', {
           errors,
           lists,
