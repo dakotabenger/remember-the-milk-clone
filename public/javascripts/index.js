@@ -45,27 +45,29 @@ document.addEventListener("DOMContentLoaded", (event) => {
   const closeButton = document.createElement("button");
   
    
-  // console.log(taskEle,"task ele")
-  // console.log(showFormButton,"SHOWFORMBUTTON")
+  
   if (showFormButton) {
       showFormButton.addEventListener("click", (e) => {
-          e.stopPropagation();
-          // console.log("hereGUYS")
+          e.stopPropagation()
           e.preventDefault();
-      // console.log("formContainer Before",formContainer)
-      formContainer.hidden = !formContainer.hidden;
-      // console.log("formContainer after", formContainer)
+         formContainer.hidden = !formContainer.hidden;
     });
 }
 // error start
+const addTButton = document.querySelector(".add-tag-button")
+const addLButton = document.querySelector(".add-list-button")
+const editButton = document.querySelector(".edit-task-button")
+const editForm = document.querySelector(".edit-task")
+const editDiv = document.querySelector(".edit-form-div")
 if (nameTableCells) {
     nameTableCells.forEach((cell) => {
         cell.addEventListener("click", async (e) => {
             e.stopPropagation();
-            const addTButton = document.querySelector(".add-tag-button")
             const tagContainer = document.querySelector(".tag-form-div")
-            const addLButton = document.querySelector(".add-list-button")
             const listContainer = document.querySelector(".list-form-div")
+            addLButton.hidden = false
+            addTButton.hidden = false
+            editButton.hidden = false
             if (!taskEle.hidden) {
                 taskEle.textContent = ""
             } else if (taskEle.hidden) {
@@ -96,7 +98,6 @@ if (nameTableCells) {
             descriptionPtag.innerHTML = "Description: N/A";
         }
         const completedTag = document.createElement("div");
-        // console.log(completed, "COMPLETED")
         if (completed === false || completed === null) {
             //Bootsrap Icon https://icons.getbootstrap.com/icons/square/
           completedTag.innerHTML = `<p>Completed: <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -161,7 +162,8 @@ if (nameTableCells) {
               cell.parentNode.removeChild(cell)
               taskEle.textContent = "";
               taskEle.hidden = !taskEle.hidden
-            
+              let json = await deleteTask.json()
+              alert(json.message)
         })
         if (addTButton) {
             addTButton.addEventListener("click", async (e) => {
@@ -183,7 +185,8 @@ if (nameTableCells) {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                 });
-                console.log(addedTask.json());
+                let addedMessage = await addedTag.json()
+                alert(addedMessage.message);
               });
             })
         }
@@ -207,34 +210,35 @@ if (nameTableCells) {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                 });
-                console.log(addedList.json());
+                let message = await addedTag.json()
+                alert(message.message);
               });
             })
         }
+        if (editButton) {
+            editButton.addEventListener("click",async (e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                editDiv.hidden = !editDiv.hidden
+                editForm.addEventListener("submit",async (e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    const editFormData = new FormData(editForm);
+                    const name = editFormData.get("name");
+                    const description = editFormData.get("description");
+                    let priority = parseInt(editFormData.get("priority"));
+                    let startDate = Date.parse(editFormData.get("start_date"));
+                    let endDate = Date.parse(editFormData.get("end_date"));
+                    let completed = editFormData.get("completed");
+                    
+                    
+                })
+            })
+
+        }
         
         
-        // addToListButton.addEventListener("submit", async (e) => {
-        //   e.preventDefault();
-        //   const listDiv = document.querySelector(".list-form-div");
-        //   const listForm = document.querySelector(".add-list");
-        //   listDiv.hidden = !listDiv.hidden
-        //   const listInput = document.createElement("input");
-        //   listInput.setAttribute("class", "user-task-input");
-        //   listInput.setAttribute("class", "hidden");
-        //   listInput.setAttribute("value", id);
-        //   listForm.appendChild(listInput);
-        //   listForm.addEventListener("submit", async (e) => {
-        //     e.preventDefault();
-        //     const listFormData = new FormData(listForm);
-        //     const list = listFormData.get("add-list");
-        //     const addedList = await fetch(`/api/tasks/${id}/list/${list}`, {
-        //       credentials: "same-origin",
-        //       method: "POST",
-        //       headers: { "Content-Type": "application/json" },
-        //     });
-        //     console.log(addedList.json());
-        //   });
-        // });
+        
       });
     });
   }
@@ -243,11 +247,15 @@ if (nameTableCells) {
     e.stopPropagation();
     taskEle.textContent = "";
     taskEle.hidden = !taskEle.hidden
+    addTButton.hidden = true
+    addLButton.hidden = true
+    editButton.hidden = true
   });
 
   if (form) {
     form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+        e.preventDefault();
+    e.stopPropagation()
       const formData = new FormData(form);
       const name = formData.get("name");
       const description = formData.get("description");
@@ -262,7 +270,7 @@ if (nameTableCells) {
           completed = true
       }
 
-      if (priority === "") {
+      if (Number.isNaN(priority)) {
           priority = 1
       }
 
@@ -294,19 +302,40 @@ if (nameTableCells) {
           }
       }
 
-      const res = await fetch("/api/tasks", {
+      const res = await fetch(`/api/tasks/${id}/edit`, {
         credentials: "same-origin",
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(reqBody),
       });
-      console.log(res)
       const json = await res.json();
       form.reset();
       const showTasks = receiveTaskFromServer(json);
+      alert(json.message)
     });
   }
-});
+  const checkboxes = document.querySelectorAll(".completed-checkbox")
+  checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", async (e) => {
+          e.stopPropagation()
+          const targetId = e.target.id;
+          const resJSON = await fetch(`/api/tasks/${targetId}`, {
+              credentials: "same-origin",
+            });
+            res = await resJSON.json()
+            let completed = !res.task.completed            
+                const res2 = await fetch(`/api/tasks/${targetId}/edit`, {
+                    credentials: "same-origin",
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({completed}),
+                });
+             
+        })
+        })
+        
+  }
+    );
 const receiveTaskFromServer = (data) => {
   const table = document.querySelector(".tasks-table");
   const newTr = document.createElement("tr");

@@ -50,7 +50,7 @@ router.post("/", requireAuth, taskValidators, asyncHandler(async (req, res) => {
                 }
                 console.log(newTask)
                 await newTask.save()
-                res.json({ newTask })
+                res.json({ newTask, message:"Task has been created!" })
 
         } else {
                 const errors = validatorErrors.array().map((error) => error.msg);
@@ -113,6 +113,9 @@ router.post("/:id/edit",requireAuth,asyncHandler(async (req,res,next) => {
                 }
                 if (req.body.priority) {
                         task.priority = req.body.priority
+                }
+                if (req.body.completed !== null) {
+                        task.completed = req.body.completed
                 }
                 await task.save()
                 res.json({ task,message:"This task has been edited!" })
