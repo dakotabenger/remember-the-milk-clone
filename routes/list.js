@@ -4,6 +4,7 @@ const { asyncHandler, csrfProtection } = require("../ultils")
 const db = require('../db/models/index')
 const router = express.Router()
 const { check, validationResult } = require('express-validator');
+const moment = require('moment')
 
 const renderListPage = (req,res,next,data) => {
     const {list,lists,listTasks, tags} = data
@@ -19,6 +20,7 @@ const listNotFoundError = (id) => {
   };
 
 router.get("/:id",requireAuth,asyncHandler(async (req,res,next) => {
+        // console.log("11111111111111111111111111111111111111111111")
     const userId = req.session.auth.userId
     const listId = req.params.id
     const list = await db.List.findByPk(listId)
@@ -26,6 +28,7 @@ router.get("/:id",requireAuth,asyncHandler(async (req,res,next) => {
     const listTasks = await db.Task.findAll({where: {list_id:listId}})
     const tags = await db.Tag.findAll({where: {user_id:userId}})
     const data = {list,lists,listTasks,tags}
+//     console.log(list)
     if (list) {
         if (list.user_id !== userId) {
 
@@ -35,6 +38,7 @@ router.get("/:id",requireAuth,asyncHandler(async (req,res,next) => {
                 err.title = 'Unauthorized';
                 throw err;
         }
+        // console.log("22222222222222222222222222222222",list.user_id)
         renderListPage(req,res,next,data)
 } else {
         next(listNotFoundError(listId))
@@ -44,18 +48,20 @@ router.get("/:id",requireAuth,asyncHandler(async (req,res,next) => {
 router.post("/",requireAuth,csrfProtection,asyncHandler(async (req,res) => {
     const validatorErrors = validationResult(req);
     const user = req.session.auth.userId
-    const lists = await db.List.findAll({where:{user_id:user}})
+    const lists = await db.List.findAll({where:{user_id:user} })
+    const tags = await db.Tag.findAll({where:{user_id:user}})
     const {name} = req.body
     if (validatorErrors.isEmpty()) {
         const list = await db.List.create({name,user_id:user})
         res.render('list', {
             list,
             lists,
+            tags,
             csrfToken: req.csrfToken(),
           })
       } else {
         const errors = validatorErrors.array().map((error) => error.msg);
-        const tasks = await db.Task.findAll({ where: {user_id: user}, order:[['start_date', 'ASC']]});
+        const tasks = await db.Task.findAll({ where: {user_id: user}, order:[['id', 'ASC']]});
         res.render('index', {
           errors,
           lists,
@@ -66,7 +72,7 @@ router.post("/",requireAuth,csrfProtection,asyncHandler(async (req,res) => {
       }
 }))
 
-router.delete("/:id",requireAuth,asyncHandler(async (req,res) => {
+router.post("/:id/delete",requireAuth,asyncHandler(async (req,res,next) => {
     const list = await db.List.findOne({
         where: {
                 id: req.params.id,
@@ -91,7 +97,7 @@ if (list) {
 }
 }))
 
-router.patch("/:id",requireAuth,csrfProtection,asyncHandler(async (req,res) => {
+router.post("/:id/edit",requireAuth,csrfProtection,asyncHandler(async (req,res,next) => {
     const listId = req.params.id
     const {name} = req.body.name
     const list = await db.List.findByPk(listId)
@@ -99,7 +105,7 @@ router.patch("/:id",requireAuth,csrfProtection,asyncHandler(async (req,res) => {
         if (req.session.auth.userId !== list.user_id) {
                 const err = new Error('Unauthorized');
                 err.status = 401;
-                err.message = 'You are not authorized to delete this task.';
+                err.message = 'You are not authorized to edit this task.';
                 err.title = 'Unauthorized';
                 throw err;
         }

@@ -11,7 +11,6 @@ module.exports = {
         userId++
       }
       const seedData = {
-        id: i,
         description: faker.lorem.sentence(),
         name: faker.lorem.word(),
         user_id: userId,

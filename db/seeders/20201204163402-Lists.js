@@ -4,14 +4,13 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     const seedArray = [];
     for (let i = 1; i < 26; i++ ) {
-      let userId = 0
+      let userId = 1
       if (i >= 15) {
         userId = 1
       } else {
         userId++
       }
       const seedData = {
-        id: i,
         name: faker.lorem.word(),
         user_id: userId,
         createdAt: new Date(),

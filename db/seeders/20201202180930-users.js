@@ -8,7 +8,6 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     const seedArray = []
     const demoUser = {
-      id: 1,
         email: "demo@dftm.com",
         hashedPassword: hash,
         createdAt: new Date(),
@@ -17,7 +16,6 @@ module.exports = {
     seedArray.push(demoUser)
     for (let i = 2; i < 16; i++) {
       const seedData = {
-        id: i,
         email: faker.internet.email(),
         hashedPassword: hash,
         createdAt: new Date(),

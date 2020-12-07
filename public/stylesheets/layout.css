@@ -1,89 +1,8 @@
-/* Dak's Nav Bar */
-
-/* .top-nav {
-    display: flex;
-
-}
-
-.menu-container {
-    display: inline-block;
-    cursor: pointer;
-    overflow: hidden;
-    background-color: #e9e9e9;
-  }
-
-  .bar1, .bar2, .bar3 {
-    width: 35px;
-    height: 5px;
-    background-color: #333;
-    margin: 6px 0;
-    transition: 0.4s;
-  }
-
-  /* Rotate first bar */
-  /* .change .bar1 {
-    -webkit-transform: rotate(-45deg) translate(-9px, 6px) ;
-    transform: rotate(-45deg) translate(-9px, 6px) ;
-  } */
-
-  /* Fade out the second bar */
-  /* .change .bar2 {
-    opacity: 0;
-  } */
-
-  /* Rotate last bar */
-  /* .change .bar3 {
-    -webkit-transform: rotate(45deg) translate(-8px, -8px) ;
-    transform: rotate(45deg) translate(-8px, -8px) ;
-  }
-
-
-  .nav-bar-three .logout-button {
-    float: left;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-
-  .nav-bar-three .logout-button:hover {
-    background-color: #ddd;
-    color: black;
-  }
-
-  .nav-bar-two .search-container {
-    align-items: center;
-  }
-
-  .nav-bar-two input[type=text] {
-    padding: 6px;
-    margin-top: 8px;
-    font-size: 17px;
-    border: none;
-  }
-
-  .nav-bar-two .search-container button {
-    float: right;
-    padding: 6px;
-    margin-top: 8px;
-    margin-right: 16px;
-    background: #ddd;
-    font-size: 17px;
-    border: none;
-    cursor: pointer;
-  }
-
-  .nav-bar-two .search-container button:hover {
-    background: #ccc;
-  }
-  */
-
   input:checked + label {
     text-decoration: line-through;
 }
 
-/* Redo Nav Bar */
+/* Nav Bar */
 .navbar {
   position: relative;
   background-color: #1C2725;
@@ -118,7 +37,7 @@ menu-icon {
   visibility: hidden;
   transition: all 0.05s ease-in-out;
   background-color: black;
-  height: 100vh;
+  height: 1000px;
   border-right: 3px solid #5DA09E;
   border-top: 3px solid #5DA09E;
 }
@@ -132,6 +51,7 @@ menu-icon {
 }
 
 .bar {
+  transition-timing-function: ease-in;
   color: white !important;
 }
 
@@ -152,12 +72,15 @@ li h1 {
   margin-bottom: 0;
 }
 
-.sub-list {
-  display: none;
-  position: absolute;
+.sub-list li a {
+  margin-left: 15px;
+  text-decoration: none;
 }
 
-
+.sub-tag li a {
+  margin-left: 15px;
+  text-decoration: none;
+}
 /* index page  */
 
 .task-view-container {
@@ -175,7 +98,8 @@ li h1 {
 .table-container {
   padding: 0;
   margin: 0;
-  height: 890px;
+  height: 700px;
+  overflow-y: scroll;
 }
 
 td {
@@ -207,13 +131,16 @@ td {
   width: 100%;
 }
 
+.form-container label {
+  color: white;
+  margin-left: 5px;
+  margin-right: 0;
+  font-weight: bold;
+}
+
 
 p {
   color: white;
-}
-
-p:hover {
-  color: #5DA09E;
 }
 
 .task-name {
@@ -232,6 +159,7 @@ p:hover {
   line-height: 25px;
   margin-bottom: 32px;
   margin-left: 6.08px;
+  margin-right: 10px;
   margin-top: 32px;
   min-height: 23px;
   min-width: 126px;
@@ -244,6 +172,25 @@ p:hover {
   border-bottom: 2px solid white;
 }
 
+.user-task-input-checkbox {
+ margin-left: 5px;
+ margin-right: 10px;
+}
+
 .body-index {
   background-color: black;
+}
+
+.index-logo {
+  filter: drop-shadow(1px 1px 3px #404040);
+  width: 34px;
+  height: auto;
+  margin-top: 10px;
+  margin-left: 45px;
+}
+
+.index-button {
+  border-radius: 5px;
+  color: #ffffff;
+  background-color: #5DA09E;
 }

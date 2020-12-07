@@ -17,21 +17,21 @@ const tagNotFoundError = (id) => {
   router.get("/:id",requireAuth,asyncHandler(async (req,res,next) => {
     const user = req.session.auth.userId
     const tagId = req.params.id
-    const tag = await db.Tag.findByPk(listId)
-    const tags = await db.Tag.findAll({where: {tag_id:req.params.id}})
+    const tag = await db.Tag.findByPk(tagId)
+    const tags = await db.Tag.findAll({where: {user_id:user}})
     const lists = await db.List.findAll({where: {user_id:user}})
-    const tagTasks = await db.Task.findAll({where: {tag_id: tagId}})
+    const tagTasks = await db.Task.findAll({where: {tag_id: tagId,user_id:user}})
     const data = {tag,lists,tagTasks,tags}
     if (tag) {
         const userId = req.session.auth.userId
-        if (list.user_id !== userId) {
+        if (tag.user_id !== userId) {
                 const err = new Error('Unauthorized'); //*tag NOT Found
                 err.status = 401;
                 err.message = 'You are not authorized to view this task';
                 err.title = 'Unauthorized';
                 throw err;
         }
-        renderTagPage(req,res,next,data)
+        res.render("tag",data)
 } else {
         next(tagNotFoundError(tagId))
 }
@@ -69,7 +69,7 @@ router.post("/",requireAuth,csrfProtection,asyncHandler(async (req,res) => {
 
       }
 }))
-router.delete("/:id",requireAuth,asyncHandler(async (req,res) => {
+router.post("/:id/delete",requireAuth,asyncHandler(async (req,res) => {
     const tag = await db.Tag.findOne({
         where: {
                 id: req.params.id,
@@ -91,7 +91,7 @@ const tasks = await db.Task.findAll({where: {tag_id:req.params.id}})
     res.redirect('/');
 }))
 
-router.patch('/:id', requireAuth, asyncHandler(async(req,res) => {
+router.post('/:id/edit', requireAuth, asyncHandler(async(req,res) => {
     const tagid = req.params.id
     const userid = req.session.auth.userId
     const lists =  await db.List.findAll({where:{user_id: userid}})
@@ -116,3 +116,5 @@ router.patch('/:id', requireAuth, asyncHandler(async(req,res) => {
         res.render('tag', {tag,tasks, lists, tags})
     }
 } ) );
+
+module.exports = router

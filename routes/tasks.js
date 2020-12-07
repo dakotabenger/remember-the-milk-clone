@@ -25,8 +25,9 @@ const taskValidators = [
 router.post("/", requireAuth, taskValidators, asyncHandler(async (req, res) => {
         const validatorErrors = validationResult(req);
         const userId = req.session.auth.userId
-        console.log(userId)
+        // console.log(userId)
         const { name } = req.body
+        // console.log(req.body)
         if (validatorErrors.isEmpty()) {
                 const newTask = await db.Task.build({ name: name, user_id: userId })
                 if (req.body.description) {
@@ -47,9 +48,9 @@ router.post("/", requireAuth, taskValidators, asyncHandler(async (req, res) => {
                 if (req.body.priority) {
                         newTask.priority = req.body.priority
                 }
-                console.log(newTask)
+                // console.log(newTask)
                 await newTask.save()
-                res.json({ newTask })
+                res.json({ newTask, message:"Task has been created!" })
 
         } else {
                 const errors = validatorErrors.array().map((error) => error.msg);
@@ -59,7 +60,7 @@ router.post("/", requireAuth, taskValidators, asyncHandler(async (req, res) => {
 
 // Delete single task route
 router.delete(
-        "/:id",
+        "/:id/",
         asyncHandler(async (req, res, next) => {
                 const task = await db.Task.findOne({
                         where: {
@@ -84,11 +85,11 @@ router.delete(
 
 
 // Edit Single task route
-router.patch("/:id",requireAuth,asyncHandler(async (req,res,next) => {
+router.patch("/:id/",requireAuth,asyncHandler(async (req,res,next) => {
         const taskId = req.params.id
         const task = await db.Task.findByPk(taskId)
         if (task) {
-                if (task.user_id !== req.sessions.auth.userId) {
+                if (task.user_id !== req.session.auth.userId) {
                         const err = new Error('Unauthorized');
                         err.status = 401;
                         err.message = 'You are not authorized to edit this task.';
@@ -113,20 +114,27 @@ router.patch("/:id",requireAuth,asyncHandler(async (req,res,next) => {
                 if (req.body.priority) {
                         task.priority = req.body.priority
                 }
+                if (req.body.completed !== null) {
+                        task.completed = req.body.completed
+                }
+                if (req.body.name !== task.name) {
+                        task.name = req.body.name
+                }
                 await task.save()
                 res.json({ task,message:"This task has been edited!" })
+                // console.log(task.completed)
         } else {
                 next(taskNotFoundError(taskId))
         }
 }))
 
 // Add Task to List
-router.patch("/:id/list/:listId",requireAuth,asyncHandler(async (req,res,next) => {
+router.post("/:id/list/:listId",requireAuth,asyncHandler(async (req,res,next) => {
         const taskId = req.params.id
         const listId = req.params.listId
         const task = await db.Task.findByPk(taskId)
         if (task) {
-                if (task.user_id !== req.sessions.auth.userId) {
+                if (task.user_id !== req.session.auth.userId) {
                         const err = new Error('Unauthorized');
                         err.status = 401;
                         err.message = 'You are not authorized to add this task to the choosen list.';
@@ -142,11 +150,11 @@ router.patch("/:id/list/:listId",requireAuth,asyncHandler(async (req,res,next) =
 
 // Delete Task from list
 
-router.patch("/:id/list/",requireAuth,asyncHandler(async (req,res,next) => {
+router.delete("/:id/list/",requireAuth,asyncHandler(async (req,res,next) => {
         const taskId = req.params.id
         const task = await db.Task.findByPk(taskId)
         if (task) {
-                if (task.user_id !== req.sessions.auth.userId) {
+                if (task.user_id !== req.session.auth.userId) {
                         const err = new Error('Unauthorized');
                         err.status = 401;
                         err.message = 'You are not authorized to delete this task from the choosen list.';
@@ -164,13 +172,13 @@ router.patch("/:id/list/",requireAuth,asyncHandler(async (req,res,next) => {
 // Get single Task
 
 router.get("/:id",requireAuth,asyncHandler(async (req,res) => {
-        console.log("HERE ONE")
+        // console.log("HERE                     ONE")
         const taskId = req.params.id
         const task = await db.Task.findByPk(taskId)
-        console.log("taskId",taskId)
-        console.log("task",task)
+        // console.log("taskId",taskId)
+        // console.log("task",task)
         if (task) {
-                console.log("HERE TWO")
+                // console.log("HERE                           TWO")
                 if (task.user_id !== req.session.auth.userId) {
                         const err = new Error('Unauthorized');
                         err.status = 401;
@@ -178,9 +186,46 @@ router.get("/:id",requireAuth,asyncHandler(async (req,res) => {
                         err.title = 'Unauthorized';
                         throw err;
                 }
-                console.log("RES",res)
+                // console.log("RES                                 ",res)
                 const resJSON = res.json({task})
-                console.log("ResJSON",resJSON)
+                // console.log("ResJSON                              ",resJSON)
+        } else {
+                next(taskNotFoundError(taskId))
+        }
+}))
+
+router.post("/:id/tag/:tagId",requireAuth,asyncHandler(async (req,res,next) => {
+        const taskId = req.params.id
+        const tagId = req.params.tagId
+        const task = await db.Task.findByPk(taskId)
+        if (task) {
+                if (task.user_id !== req.session.auth.userId) {
+                        const err = new Error('Unauthorized');
+                        err.status = 401;
+                        err.message = 'You are not authorized to add this task to the choosen list.';
+                        err.title = 'Unauthorized';
+                        throw err;
+                }
+                task.update({tag_id:tagId})
+                res.json({message:"The tag has been added to the task.",task})
+        } else {
+                next(taskNotFoundError(taskId))
+        }
+}))
+
+router.delete("/:id/tag/",requireAuth,asyncHandler(async (req,res,next) => {
+        const taskId = req.params.id
+        const task = await db.Task.findByPk(taskId)
+        if (task) {
+                if (task.user_id !== req.session.auth.userId) {
+                        const err = new Error('Unauthorized');
+                        err.status = 401;
+                        err.message = 'You are not authorized to delete this task from the choosen list.';
+                        err.title = 'Unauthorized';
+                        throw err;
+                }
+                task.update({tag:null})
+                res.json({message: "The tag has been deleted!",task})
         } else {
                 next(taskNotFoundError(taskId))
         }
