@@ -24,6 +24,43 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const editForm = document.querySelector(".edit-task");
     const editDiv = document.querySelector(".edit-form-div");
     
+    if (localStorage.getItem("theme") === "light") {
+        lightTheme();
+    };
+    if (toggleButton) {
+        toggleButton.addEventListener("click", () => {
+            if (localStorage.getItem("theme") === "light") {
+                darkTheme();
+            } else {
+                lightTheme();
+            }
+        });
+    }
+    function lightTheme() {
+        toggleButton.classList.add("light");
+        image.forEach((ele) => ele.classList.add("light"));
+        userInput.forEach((ele) => ele.classList.add("light"));
+        signUpContainer.classList.add("light");
+        signUpText.classList.add("light");
+        signUpButton.classList.add("light");
+        signUpHeader.classList.add("light");
+        signUpText.classList.add("light");
+        errorMsg.forEach((ele) => ele.classList.add("light"));
+        localStorage.setItem("theme", "light");
+    }
+    function darkTheme() {
+        toggleButton.classList.remove("light");
+        image.forEach((ele) => ele.classList.remove("light"));
+        userInput.forEach((ele) => ele.classList.remove("light"));
+        signUpContainer.classList.remove("light");
+        signUpText.classList.remove("light");
+        signUpButton.classList.remove("light");
+        signUpHeader.classList.remove("light");
+        signUpText.classList.remove("light");
+        errorMsg.forEach((ele) => ele.classList.remove("light"));
+        localStorage.setItem("theme", "dark");
+    }
+
     const trashCanButtons = document.querySelectorAll(".trashcan")
     trashCanButtons.forEach((button) => {
         button.innerHTML = `<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
