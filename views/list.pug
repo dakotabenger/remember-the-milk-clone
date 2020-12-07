@@ -46,7 +46,7 @@ block content
           input(type='hidden' name='_csrf' value=csrfToken)
           input(class='user-input' type='text' placeholder='List Name' name='name')
           button(class='user-input tasksubmitbutton index-button create-list-submit' type='submit' name='submit') Create List
-      button(class="create-tag-button" type="submit") Create Tag
+      button(class="create-tag-button index-button" type="submit") Create Tag
       div.new-tag-div(hidden)
         form(class='new-tag-form' method='post' action='/tags')
             input(type='hidden' name='_csrf' value=csrfToken)
@@ -66,12 +66,14 @@ block content
           input(class='user-task-input-checkbox' type='checkbox' placeholder='Completed' name='completed')
           label(for="lists") Assign To List
           select(name="lists" class="user-task-input")
-            each list in lists
-              option(value=list.id)=list.name
+            if lists
+              each list in lists
+                option(value=list.id)=list.name
           label(for="tasks") Add a Tag
           select(name="tags" class="user-task-input")
-            each tag in tags
-              option(value.tag.id)=tag.name
+            if tags
+              each tag in tags
+                option(value.tag.id)=tag.name
           button(class='tasksubmitbutton index-button' type='submit' name='submit') Add Task
       div(class="table-container")
         table(class='tasks-table')
@@ -80,16 +82,17 @@ block content
               th.task-name Task Name
 
           tbody(class='TBD')
-            each task in tasks
-              tr(class='TBD2')
-                td(id=task.id class="task-td")
-                    if task.completed
-                      div
-                      input(id=task.id type="checkbox" class=`completed-checkbox-${task.id} completed-checkbox` checked)
-                      label(id=task.id class=`task-label id-${task.id}`)=task.name
-                    else
-                      input(id=task.id type="checkbox" class=`completed-checkbox-${task.id} completed-checkbox`)
-                      label(id=task.id class=`task-label id-${task.id}`)=task.name
+            if listTasks
+              each task in listTasks
+                tr(class='TBD2')
+                  td(id=task.id class="task-td")
+                      if task.completed
+                        div
+                        input(id=task.id type="checkbox" class=`completed-checkbox-${task.id} completed-checkbox` checked)
+                        label(id=task.id class=`task-label id-${task.id}`)=task.name
+                      else
+                        input(id=task.id type="checkbox" class=`completed-checkbox-${task.id} completed-checkbox`)
+                        label(id=task.id class=`task-label id-${task.id}`)=task.name
   button(class="theme-toggle-button" id="toggle-button") Swap Themes
     svg(style="width:24px;height:24px" viewBox="0 0 24 24")
       path(fill="currentColor"

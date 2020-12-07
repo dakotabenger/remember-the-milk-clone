@@ -49,12 +49,14 @@ router.post("/",requireAuth,csrfProtection,asyncHandler(async (req,res) => {
     const validatorErrors = validationResult(req);
     const user = req.session.auth.userId
     const lists = await db.List.findAll({where:{user_id:user} })
+    const tags = await db.Tag.findAll({where:{user_id:user}})
     const {name} = req.body
     if (validatorErrors.isEmpty()) {
         const list = await db.List.create({name,user_id:user})
         res.render('list', {
             list,
             lists,
+            tags,
             csrfToken: req.csrfToken(),
           })
       } else {

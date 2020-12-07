@@ -12,7 +12,51 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const signUpText = document.querySelector(".sign-up-text");
     const userInput = document.querySelectorAll(".user-input");
     const errorMsg = document.querySelectorAll(".error-msg");
-
+    const createTagFormButton = document.querySelector(".create-tag-button")
+    const createListFormButton = document.querySelector(".create-list-button")
+    const hiddenListFormDiv = document.querySelector(".new-list-div")
+    const hiddenTagFormDiv = document.querySelector(".new-tag-div")
+    const hiddenListForm = document.querySelector(".new-list")
+    const hiddenTagForm = document.querySelector(".new-tag-form")
+    const addTButton = document.querySelector(".add-tag-button");
+    const addLButton = document.querySelector(".add-list-button");
+    const editButton = document.querySelector(".edit-task-button");
+    const editForm = document.querySelector(".edit-task");
+    const editDiv = document.querySelector(".edit-form-div");
+    
+    createListFormButton.addEventListener("click", async (e) => {
+        hiddenListFormDiv.hidden = !hiddenListFormDiv.hidden
+        createListFormButton.hidden = !createListFormButton.hidden
+        if(!addLButton.hidden) {
+            addLButton.hidden = true
+        }
+        if (!addTButton.hidden) {
+            addTButton.hidden = true
+        }
+        if (!editButton.hidden) {
+            editButton.hidden = true
+        }
+        createTagFormButton.hidden = !createTagFormButton.hidden
+        hiddenTagFormDiv.hidden = true
+        editDiv.hidden = true
+    })
+    createTagFormButton.addEventListener("click",async (e) =>{ 
+        hiddenTagFormDiv.hidden = !hiddenTagFormDiv.hidden
+        createListFormButton.hidden = !createListFormButton.hidden
+        if(!addLButton.hidden) {
+            addLButton.hidden = true
+        }
+        if (!addTButton.hidden) {
+            addTButton.hidden = true
+        }
+        if (!editButton.hidden) {
+            editButton.hidden = true
+        }
+        createTagFormButton.hidden = !createTagFormButton.hidden
+        hiddenListFormDiv.hidden = true
+        editDiv.hidden = true
+    })
+    
     if (localStorage.getItem("theme") === "light") {
         lightTheme();
     };
@@ -92,14 +136,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
             e.stopPropagation();
             e.preventDefault();
             formContainer.hidden = !formContainer.hidden;
+            addLButton.hidden = true;
+            addTButton.hidden = true;
+            editButton.hidden = true;
+            createListFormButton.hidden = !createListFormButton.hidden
+            createTagFormButton.hidden = !createTagFormButton.hidden
+            hiddenListFormDiv.hidden = true
+            hiddenTagFormDiv.hidden = true
+            editDiv.hidden = true
+
+
         });
     }
     // error start
-    const addTButton = document.querySelector(".add-tag-button");
-    const addLButton = document.querySelector(".add-list-button");
-    const editButton = document.querySelector(".edit-task-button");
-    const editForm = document.querySelector(".edit-task");
-    const editDiv = document.querySelector(".edit-form-div");
+
+
 
     const checkboxes = document.querySelectorAll(".completed-checkbox");
     if (checkboxes) {
@@ -112,9 +163,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 });
                 res = await resJSON.json();
                 let completed = !res.task.completed;
-                const res2 = await fetch(`/api/tasks/${targetId}/edit`, {
+                const res2 = await fetch(`/api/tasks/${targetId}/`, {
                     credentials: "same-origin",
-                    method: "POST",
+                    method: "PATCH",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ completed }),
                 });
@@ -203,16 +254,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 taskEle.appendChild(priorityTag);
                 taskEle.appendChild(closeButton);
                 const deleteButton = document.createElement("button");
-                // deleteButton.textContent = "Delete Task";
+                deleteButton.textContent = "Delete Task";
                 deleteButton.setAttribute("class", "index-button")
                 taskEle.appendChild(deleteButton);
 
                 deleteButton.addEventListener("click", async (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    const deleteTask = await fetch(`/api/tasks/${id}/delete`, {
+                    const deleteTask = await fetch(`/api/tasks/${id}/`, {
                         credentials: "same-origin",
-                        method: "POST",
+                        method: "DELETE",
                         headers: { "Content-Type": "application/json" },
                     });
                     cell.parentNode.removeChild(cell);
@@ -225,6 +276,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     addTButton.addEventListener("click", async (e) => {
                         e.preventDefault();
                         e.stopPropagation();
+                        addLButton.hidden = true;
+                        addTButton.hidden = true;
+                        editButton.hidden = true;
+                        createListFormButton.hidden = !createListFormButton.hidden
+                        createTagFormButton.hidden = !createTagFormButton.hidden
+                        hiddenListFormDiv.hidden = true
+                        hiddenTagFormDiv.hidden = true
+                        editDiv.hidden = true
                         tagContainer.hidden = !tagContainer.hidden;
                         const tagForm = document.querySelector(".add-tag");
                         const taskInput = document.createElement("input");
@@ -234,6 +293,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         tagForm.appendChild(taskInput);
                         tagForm.addEventListener("submit", async (e) => {
                             e.preventDefault();
+                            addLButton.hidden = false;
+                            addTButton.hidden = false;
+                            editButton.hidden = false;
+                            createListFormButton.hidden = !createListFormButton.hidden
+                            createTagFormButton.hidden = !createTagFormButton.hidden
+                            hiddenListFormDiv.hidden = true
+                            hiddenTagFormDiv.hidden = true
+                            editDiv.hidden = true
                             const tagFormData = new FormData(tagForm);
                             const tag = tagFormData.get("add-tags");
                             const addedTask = await fetch(`/api/tasks/${id}/tag/${tag}`, {
@@ -250,6 +317,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     addLButton.addEventListener("click", async (e) => {
                         e.preventDefault();
                         e.stopPropagation();
+                        addLButton.hidden = true;
+                        addTButton.hidden = true;
+                        editButton.hidden = true;
+                        createListFormButton.hidden = !createListFormButton.hidden
+                        createTagFormButton.hidden = !createTagFormButton.hidden
+                        hiddenListFormDiv.hidden = true
+                        hiddenTagFormDiv.hidden = true
+                        editDiv.hidden = true
                         listContainer.hidden = !listContainer.hidden;
                         const listForm = document.querySelector(".add-list");
                         const listInput = document.createElement("input");
@@ -259,6 +334,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         listForm.appendChild(listInput);
                         listForm.addEventListener("submit", async (e) => {
                             e.preventDefault();
+                            addLButton.hidden = false;
+                            addTButton.hidden = false;
+                            editButton.hidden = false;
+                            createListFormButton.hidden = !createListFormButton.hidden
+                            createTagFormButton.hidden = !createTagFormButton.hidden
+                            hiddenListFormDiv.hidden = true
+                            hiddenTagFormDiv.hidden = true
+                            editDiv.hidden = true
                             const listFormData = new FormData(listForm);
                             const list = listFormData.get("add-list");
                             const addedList = await fetch(`/api/tasks/${id}/list/${list}`, {
@@ -275,10 +358,24 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     editButton.addEventListener("click", async (e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        editDiv.hidden = !editDiv.hidden;
+                        addLButton.hidden = true;
+                        addTButton.hidden = true;
+                        editButton.hidden = true;
+                        createListFormButton.hidden = !createListFormButton.hidden
+                        createTagFormButton.hidden = !createTagFormButton.hidden
+                        hiddenListFormDiv.hidden = true
+                        hiddenTagFormDiv.hidden = true
+                        editDiv.hidden = false
                         editForm.addEventListener("submit", async (e) => {
                             e.preventDefault();
                             e.stopPropagation();
+                            addLButton.hidden = false;
+                            addTButton.hidden = false;
+                            editButton.hidden = false;
+                            createListFormButton.hidden = !createListFormButton.hidden
+                            createTagFormButton.hidden = !createTagFormButton.hidden
+                            hiddenListFormDiv.hidden = true
+                            hiddenTagFormDiv.hidden = true
                             const editFormData = new FormData(editForm);
                             const name = editFormData.get("name");
                             const description = editFormData.get("description");
@@ -286,6 +383,54 @@ document.addEventListener("DOMContentLoaded", (event) => {
                             let startDate = Date.parse(editFormData.get("start_date"));
                             let endDate = Date.parse(editFormData.get("end_date"));
                             let completed = editFormData.get("completed");
+                            
+                            if (completed === null) {
+                                completed = false;
+                            } else {
+                                completed = true;
+                            }
+                            
+                            if (Number.isNaN(priority)) {
+                                priority = 1;
+                            }
+                            
+                            let reqBody = {
+                                name,
+                                description,
+                                priority,
+                                completed,
+                            };
+                            
+                            if (startDate && endDate) {
+                                reqBody = {
+                                    ...reqBody,
+                                    startDate,
+                                    endDate,
+                                };
+                            } else if (startDate) {
+                                reqBody = {
+                                    ...reqBody,
+                                    startDate,
+                                };
+                            } else if (endDate) {
+                                reqBody = {
+                                    ...reqBody,
+                                    endDate,
+                                };
+                            }
+                            
+                            const res = await fetch(`/api/tasks/${id}`, {
+                                credentials: "same-origin",
+                                method: "PATCH",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(reqBody),
+                            });
+                            const json = await res.json();
+                            console.log(json)
+                            form.reset();
+                            const showTasks = receiveTaskFromServer(json);
+                            alert(json.message);
+                            editDiv.hidden = true
                         });
                     });
                 }
@@ -383,14 +528,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 taskEle.appendChild(closeButton);
                 const deleteButton = document.createElement("button");
                 deleteButton.textContent = "Delete Task";
+                deleteButton.setAttribute("class", "index-button")
+
                 taskEle.appendChild(deleteButton);
 
                 deleteButton.addEventListener("click", async (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    const deleteTask = await fetch(`/api/tasks/${id}/delete`, {
+                    const deleteTask = await fetch(`/api/tasks/${id}/`, {
                         credentials: "same-origin",
-                        method: "POST",
+                        method: "DELETE",
                         headers: { "Content-Type": "application/json" },
                     });
                     cell.parentNode.removeChild(cell);
@@ -403,6 +550,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     addTButton.addEventListener("click", async (e) => {
                         e.preventDefault();
                         e.stopPropagation();
+                        addLButton.hidden = true;
+                        addTButton.hidden = true;
+                        editButton.hidden = true;
+                        createListFormButton.hidden = !createListFormButton.hidden
+                        createTagFormButton.hidden = !createTagFormButton.hidden
+                        hiddenListFormDiv.hidden = true
+                        hiddenTagFormDiv.hidden = true
+                        editDiv.hidden = true
                         tagContainer.hidden = !tagContainer.hidden;
                         const tagForm = document.querySelector(".add-tag");
                         const taskInput = document.createElement("input");
@@ -412,9 +567,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         tagForm.appendChild(taskInput);
                         tagForm.addEventListener("submit", async (e) => {
                             e.preventDefault();
+                            addLButton.hidden = false;
+                            addTButton.hidden = false;
+                            editButton.hidden = false;
+                            createListFormButton.hidden = !createListFormButton.hidden
+                            createTagFormButton.hidden = !createTagFormButton.hidden
+                            hiddenListFormDiv.hidden = true
+                            hiddenTagFormDiv.hidden = true
+                            editDiv.hidden = true
                             const tagFormData = new FormData(tagForm);
                             const tag = tagFormData.get("add-tags");
-                            const addedTask = await fetch(`/api/tasks/${id}/tag/${tag}`, {
+                            const addedTag = await fetch(`/api/tasks/${id}/tag/${tag}`, {
                                 credentials: "same-origin",
                                 method: "POST",
                                 headers: { "Content-Type": "application/json" },
@@ -428,6 +591,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     addLButton.addEventListener("click", async (e) => {
                         e.preventDefault();
                         e.stopPropagation();
+                        addLButton.hidden = true;
+                        addTButton.hidden = true;
+                        editButton.hidden = true;
+                        createListFormButton.hidden = !createListFormButton.hidden
+                        createTagFormButton.hidden = !createTagFormButton.hidden
+                        hiddenListFormDiv.hidden = true
+                        hiddenTagFormDiv.hidden = true
+                        editDiv.hidden = true
                         listContainer.hidden = !listContainer.hidden;
                         const listForm = document.querySelector(".add-list");
                         const listInput = document.createElement("input");
@@ -437,6 +608,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         listForm.appendChild(listInput);
                         listForm.addEventListener("submit", async (e) => {
                             e.preventDefault();
+                            addLButton.hidden = false;
+                            addTButton.hidden = false;
+                            editButton.hidden = false;
+                            createListFormButton.hidden = !createListFormButton.hidden
+                            createTagFormButton.hidden = !createTagFormButton.hidden
+                            hiddenListFormDiv.hidden = true
+                            hiddenTagFormDiv.hidden = true
+                            editDiv.hidden = true
                             const listFormData = new FormData(listForm);
                             const list = listFormData.get("add-list");
                             const addedList = await fetch(`/api/tasks/${id}/list/${list}`, {
@@ -444,7 +623,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                                 method: "POST",
                                 headers: { "Content-Type": "application/json" },
                             });
-                            let message = await addedTag.json();
+                            let message = await addedList.json();
                             alert(message.message);
                         });
                     });
@@ -453,10 +632,24 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     editButton.addEventListener("click", async (e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        editDiv.hidden = !editDiv.hidden;
+                        addLButton.hidden = true;
+                        addTButton.hidden = true;
+                        editButton.hidden = true;
+                        createListFormButton.hidden = !createListFormButton.hidden
+                        createTagFormButton.hidden = !createTagFormButton.hidden
+                        hiddenListFormDiv.hidden = true
+                        hiddenTagFormDiv.hidden = true
+                        editDiv.hidden = false;
                         editForm.addEventListener("submit", async (e) => {
                             e.preventDefault();
                             e.stopPropagation();
+                            addLButton.hidden = false;
+                            addTButton.hidden = false;
+                            editButton.hidden = false;
+                            createListFormButton.hidden = !createListFormButton.hidden
+                            createTagFormButton.hidden = !createTagFormButton.hidden
+                            hiddenListFormDiv.hidden = true
+                            hiddenTagFormDiv.hidden = true
                             const editFormData = new FormData(editForm);
                             const name = editFormData.get("name");
                             const description = editFormData.get("description");
@@ -464,6 +657,53 @@ document.addEventListener("DOMContentLoaded", (event) => {
                             let startDate = Date.parse(editFormData.get("start_date"));
                             let endDate = Date.parse(editFormData.get("end_date"));
                             let completed = editFormData.get("completed");
+                            if (completed === null) {
+                                completed = false;
+                            } else {
+                                completed = true;
+                            }
+                            
+                            if (Number.isNaN(priority)) {
+                                priority = 1;
+                            }
+                            
+                            let reqBody = {
+                                name,
+                                description,
+                                priority,
+                                completed,
+                            };
+                            
+                            if (startDate && endDate) {
+                                reqBody = {
+                                    ...reqBody,
+                                    startDate,
+                                    endDate,
+                                };
+                            } else if (startDate) {
+                                reqBody = {
+                                    ...reqBody,
+                                    startDate,
+                                };
+                            } else if (endDate) {
+                                reqBody = {
+                                    ...reqBody,
+                                    endDate,
+                                };
+                            }
+                            
+                            const res = await fetch(`/api/tasks/${id}`, {
+                                credentials: "same-origin",
+                                method: "PATCH",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(reqBody),
+                            });
+                            const json = await res.json();
+                            console.log(json)
+                            form.reset();
+                            const showTasks = receiveTaskFromServer(json);
+                            alert(json.message);
+                            editDiv.hidden = true
                         });
                     });
                 }
@@ -484,6 +724,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
             e.stopPropagation();
+            addLButton.hidden = false;
+            addTButton.hidden = false;
+            editButton.hidden = false;
+            createListFormButton.hidden = !createListFormButton.hidden
+            createTagFormButton.hidden = !createTagFormButton.hidden
+            hiddenListFormDiv.hidden = true
+            hiddenTagFormDiv.hidden = true
+            editDiv.hidden = true
             const formData = new FormData(form);
             const name = formData.get("name");
             const description = formData.get("description");
@@ -527,7 +775,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 };
             }
 
-            const res = await fetch(`/api/tasks/${id}/edit`, {
+            const res = await fetch(`/api/tasks/`, {
                 credentials: "same-origin",
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

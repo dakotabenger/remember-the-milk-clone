@@ -59,8 +59,8 @@ router.post("/", requireAuth, taskValidators, asyncHandler(async (req, res) => {
 }))
 
 // Delete single task route
-router.post(
-        "/:id/delete",
+router.delete(
+        "/:id/",
         asyncHandler(async (req, res, next) => {
                 const task = await db.Task.findOne({
                         where: {
@@ -85,7 +85,7 @@ router.post(
 
 
 // Edit Single task route
-router.put("/:id/",requireAuth,asyncHandler(async (req,res,next) => {
+router.patch("/:id/",requireAuth,asyncHandler(async (req,res,next) => {
         const taskId = req.params.id
         const task = await db.Task.findByPk(taskId)
         if (task) {
@@ -116,6 +116,9 @@ router.put("/:id/",requireAuth,asyncHandler(async (req,res,next) => {
                 }
                 if (req.body.completed !== null) {
                         task.completed = req.body.completed
+                }
+                if (req.body.name !== task.name) {
+                        task.name = req.body.name
                 }
                 await task.save()
                 res.json({ task,message:"This task has been edited!" })
