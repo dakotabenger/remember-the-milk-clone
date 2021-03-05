@@ -834,12 +834,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 const receiveTaskFromServer = (data) => {
     console.log(data.newTask)
-    // const exisitingTask = document.querySelectorAll(`#id-${data.newTask.id}`)
-    // if (exisitingTask) { 
-    //     const label = document.querySelector(`.id-${data.newTask.id}`)
-    //     label.innerHTML = `${data.newTask.name}`
-    // } 
-    // else {
+    if (data.task) {
+    const exisitingTask = document.querySelectorAll(`#id-${data.task.id}`)
+    if (!!exisitingTask) { 
+        const label = document.querySelector(`.id-${data.task.id}`)
+        label.innerHTML = `${data.task.name}`
+    }} else if (data.newTask) {
         
         const table = document.querySelector(".tasks-table");
         const newTr = document.createElement("tr");
@@ -857,5 +857,5 @@ const receiveTaskFromServer = (data) => {
    
         newTr.appendChild(newTd);
         table.appendChild(newTr);
-    // }
+    }
 };
