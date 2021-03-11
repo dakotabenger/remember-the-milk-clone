@@ -119,11 +119,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
         toggleButton.classList.add("light");
         image.forEach((ele) => ele.classList.add("light"));
         userInput.forEach((ele) => ele.classList.add("light"));
-        signUpContainer.classList.add("light");
-        signUpText.classList.add("light");
-        signUpButton.classList.add("light");
-        signUpHeader.classList.add("light");
-        signUpText.classList.add("light");
+        // signUpContainer.classList.add("light");
+        // signUpText.classList.add("light");
+        // signUpButton.classList.add("light");
+        // signUpHeader.classList.add("light");
+        // signUpText.classList.add("light");
         errorMsg.forEach((ele) => ele.classList.add("light"));
         localStorage.setItem("theme", "light");
     }
