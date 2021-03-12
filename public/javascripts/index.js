@@ -833,24 +833,25 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 });
 const receiveTaskFromServer = (data) => {
+    console.log(data.newTask)
+    if (data.task) {
     const exisitingTask = document.querySelectorAll(`#id-${data.task.id}`)
-    if (exisitingTask) { 
+    if (!!exisitingTask) { 
         const label = document.querySelector(`.id-${data.task.id}`)
-        label.textContent = `${data.task.name}`
-    } 
-    else {
+        label.innerHTML = `${data.task.name}`
+    }} else if (data.newTask) {
         
         const table = document.querySelector(".tasks-table");
         const newTr = document.createElement("tr");
         const newTd = document.createElement("td");
         const newCheckbox = document.createElement("input")
         newCheckbox.setAttribute("type","checkbox")
-        newCheckbox.setAttribute("class",`completed-checkbox-${data.task.id} completed-checkbox`)
-        if (data.task.completed) {
-            newTd.innerHTML = `<input id="${data.task.id}" type="checkbox" class="completed-checkbox-${data.task.id} completed-checkbox" checked> <label id="${data.task.id}" class-"task-label id-${data.task.id}>${data.task.name}</label>`
+        newCheckbox.setAttribute("class",`completed-checkbox-${data.newTask.id} completed-checkbox`)
+        if (data.newTask.completed) {
+            newTd.innerHTML = `<input id="${data.newTask.id}" type="checkbox" class="completed-checkbox-${data.newTask.id} completed-checkbox" checked> <label id="${data.newTask.id}" class-"task-label id-${data.newTask.id}>${data.newTask.name}</label>`
         } else {
 
-            newTd.innerHTML = `<input id="${data.task.id}" type="checkbox" class="completed-checkbox-${data.task.id} completed-checkbox"><label id="${data.task.id}" class-"task-label id-${data.task.id}>${data.task.name}</label>`;
+            newTd.innerHTML = `<input id="${data.newTask.id}" type="checkbox" class="completed-checkbox-${data.newTask.id} completed-checkbox"><label id="${data.newTask.id}" class-"task-label id-${data.newTask.id}>${data.newTask.name}</label>`;
         }
           
    
