@@ -21,6 +21,12 @@ block content
                             +field("Password", "password", null, "password")
                             div
                                 button(type='submit' class="sign-up-button") Login
+                        form(class="demo-login" action="/users/login" method="post")
+                            input(type="hidden" name="_csrf" value=csrfToken)
+                            input(type="hidden" name="email" value="demo@dftm.com")
+                            input(type="hidden" name="password" value="password")
+                            div 
+                                button(type="submit" class="sign-up-button") Demo Login
                         div
                             p: a.switch-page(href='/users/sign-up') Don't have an account? Sign up here.
                             div
